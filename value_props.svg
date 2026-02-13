@@ -1,0 +1,82 @@
+<svg width="900" height="250" viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="250" fill="#f8f9fa"/>
+
+  <!-- Value Prop 1: Time Saved -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="0" width="180" height="180" rx="12" fill="white" stroke="#ff5a0a" stroke-width="3" filter="url(#shadow)"/>
+
+    <!-- Clock icon -->
+    <circle cx="90" cy="70" r="30" fill="#fff3ed"/>
+    <circle cx="90" cy="70" r="30" fill="none" stroke="#ff5a0a" stroke-width="3"/>
+    <line x1="90" y1="70" x2="90" y2="50" stroke="#ff5a0a" stroke-width="3"/>
+    <line x1="90" y1="70" x2="105" y2="70" stroke="#ff5a0a" stroke-width="3"/>
+
+    <text x="90" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ff5a0a">10-15</text>
+    <text x="90" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#1a1a1a">hours saved</text>
+    <text x="90" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5a5a5a">per month</text>
+  </g>
+
+  <!-- Value Prop 2: Faster Close -->
+  <g transform="translate(260, 50)">
+    <rect x="0" y="0" width="180" height="180" rx="12" fill="white" stroke="#4d65ff" stroke-width="3" filter="url(#shadow)"/>
+
+    <!-- Calendar with checkmark -->
+    <rect x="60" y="40" width="60" height="50" rx="4" fill="#e8ebff"/>
+    <rect x="60" y="40" width="60" height="12" rx="4" fill="#4d65ff"/>
+    <circle cx="90" cy="75" r="15" fill="white" stroke="#4d65ff" stroke-width="2"/>
+    <path d="M 83 75 L 87 79 L 97 69" stroke="#4d65ff" stroke-width="3" fill="none"/>
+
+    <text x="90" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4d65ff">2-3 days</text>
+    <text x="90" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#1a1a1a">faster close</text>
+    <text x="90" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5a5a5a">no receipt delays</text>
+  </g>
+
+  <!-- Value Prop 3: Zero Effort -->
+  <g transform="translate(470, 50)">
+    <rect x="0" y="0" width="180" height="180" rx="12" fill="white" stroke="#ff5a0a" stroke-width="3" filter="url(#shadow)"/>
+
+    <!-- Magic wand / sparkle -->
+    <line x1="70" y1="80" x2="110" y2="40" stroke="#ff5a0a" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="70" cy="80" r="4" fill="#ff5a0a"/>
+
+    <!-- Sparkles -->
+    <g fill="#ff5a0a">
+      <circle cx="90" cy="50" r="3"/>
+      <circle cx="105" cy="60" r="3"/>
+      <circle cx="95" cy="70" r="3"/>
+    </g>
+
+    <text x="90" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ff5a0a">0</text>
+    <text x="90" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#1a1a1a">employee effort</text>
+    <text x="90" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5a5a5a">fully automatic</text>
+  </g>
+
+  <!-- Value Prop 4: Audit Ready -->
+  <g transform="translate(680, 50)">
+    <rect x="0" y="0" width="180" height="180" rx="12" fill="white" stroke="#4d65ff" stroke-width="3" filter="url(#shadow)"/>
+
+    <!-- Document with checkmarks -->
+    <rect x="65" y="40" width="50" height="65" rx="4" fill="#e8ebff" stroke="#4d65ff" stroke-width="2"/>
+    <line x1="73" y1="52" x2="107" y2="52" stroke="#4d65ff" stroke-width="2"/>
+    <line x1="73" y1="62" x2="107" y2="62" stroke="#4d65ff" stroke-width="2"/>
+    <line x1="73" y1="72" x2="95" y2="72" stroke="#4d65ff" stroke-width="2"/>
+
+    <!-- Shield checkmark -->
+    <circle cx="90" cy="80" r="18" fill="white" stroke="#4d65ff" stroke-width="2"/>
+    <path d="M 83 80 L 87 84 L 97 74" stroke="#4d65ff" stroke-width="3" fill="none"/>
+
+    <text x="90" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4d65ff">100%</text>
+    <text x="90" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#1a1a1a">audit ready</text>
+    <text x="90" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5a5a5a">complete trails</text>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1a1a1a">Key Benefits</text>
+</svg>

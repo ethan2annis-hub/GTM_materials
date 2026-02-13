@@ -1,0 +1,69 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="200" fill="#ffffff"/>
+
+  <!-- Gmail -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="100" height="80" rx="12" fill="white" stroke="#4d65ff" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="15" y="20" width="70" height="45" rx="4" fill="#4d65ff" opacity="0.1"/>
+    <path d="M 20 30 L 50 50 L 80 30" stroke="#4d65ff" stroke-width="3" fill="none"/>
+    <text x="50" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">Gmail</text>
+  </g>
+
+  <!-- Outlook -->
+  <g transform="translate(170, 60)">
+    <rect x="0" y="0" width="100" height="80" rx="12" fill="white" stroke="#4d65ff" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="15" y="20" width="70" height="45" rx="4" fill="#4d65ff" opacity="0.1"/>
+    <path d="M 20 30 L 50 50 L 80 30" stroke="#4d65ff" stroke-width="3" fill="none"/>
+    <rect x="35" y="38" width="30" height="20" rx="2" fill="white" stroke="#4d65ff" stroke-width="2"/>
+    <text x="50" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">Outlook</text>
+  </g>
+
+  <!-- Lyft -->
+  <g transform="translate(290, 60)">
+    <rect x="0" y="0" width="100" height="80" rx="12" fill="white" stroke="#ff5a0a" stroke-width="2" filter="url(#shadow)"/>
+    <circle cx="50" cy="42" r="18" fill="#ff5a0a" opacity="0.2"/>
+    <path d="M 40 35 Q 50 25, 60 35" stroke="#ff5a0a" stroke-width="3" fill="none"/>
+    <circle cx="35" cy="48" r="8" fill="white" stroke="#ff5a0a" stroke-width="2"/>
+    <circle cx="65" cy="48" r="8" fill="white" stroke="#ff5a0a" stroke-width="2"/>
+    <text x="50" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">Lyft</text>
+  </g>
+
+  <!-- Uber -->
+  <g transform="translate(410, 60)">
+    <rect x="0" y="0" width="100" height="80" rx="12" fill="white" stroke="#ff5a0a" stroke-width="2" filter="url(#shadow)"/>
+    <circle cx="50" cy="42" r="20" fill="#ff5a0a" opacity="0.2"/>
+    <rect x="38" y="35" width="24" height="15" rx="3" fill="#ff5a0a"/>
+    <text x="50" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">Uber</text>
+  </g>
+
+  <!-- Title -->
+  <text x="300" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1a1a1a">Automatic Receipt Integrations</text>
+
+  <!-- Coming soon badge -->
+  <rect x="165" y="8" width="70" height="18" rx="9" fill="#fff3ed"/>
+  <text x="200" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ff5a0a">COMING SOON</text>
+
+  <rect x="405" y="8" width="70" height="18" rx="9" fill="#fff3ed"/>
+  <text x="440" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ff5a0a">COMING SOON</text>
+
+  <!-- Connection lines to center -->
+  <g stroke="#4d65ff" stroke-width="2" opacity="0.3" fill="none">
+    <path d="M 100 150 Q 100 170, 280 170"/>
+    <path d="M 220 150 Q 220 165, 285 165"/>
+    <path d="M 340 150 Q 340 165, 315 165"/>
+    <path d="M 460 150 Q 460 170, 320 170"/>
+  </g>
+
+  <!-- Center BILL logo -->
+  <g transform="translate(250, 165)">
+    <circle cx="50" cy="0" r="25" fill="#4d65ff"/>
+    <text x="50" y="6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">BILL</text>
+  </g>
+</svg>
