@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touchless Transactions - Product Launch Materials | BILL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #ff5a0a;
+            --dark-orange: #e64f09;
+            --light-orange: #fff3ed;
+            --button-blue: #4d65ff;
+            --dark-blue: #3a4fd9;
+            --light-blue: #e8ebff;
+            --text-dark: #1a1a1a;
+            --text-gray: #5a5a5a;
+            --border-gray: #e0e0e0;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .header {
+            background: var(--white);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border-left: 6px solid var(--primary-orange);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: var(--text-gray);
+        }
+
+        .header .subtitle {
+            display: inline-block;
+            background: var(--light-orange);
+            color: var(--primary-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: 0.875rem 1.75rem;
+            border: 2px solid var(--border-gray);
+            background: var(--white);
+            color: var(--text-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            border-color: var(--button-blue);
+            color: var(--button-blue);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: var(--button-blue);
+            color: var(--white);
+            border-color: var(--button-blue);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-orange);
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        th {
+            background: var(--button-blue);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        .highlight-box {
+            background: var(--light-orange);
+            border-left: 4px solid var(--primary-orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid var(--border-gray);
+            margin: 2.5rem 0;
+        }
+
+        .internal-note {
+            background: #fff9e6;
+            border-left: 4px solid #ffb800;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5a5000;
+        }
+
+        code {
+            background: var(--bg-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--primary-orange);
+        }
+
+        .section-divider {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            margin: 3rem 0;
+            font-weight: 300;
+        }
+
+        .elevator-pitch {
+            background: linear-gradient(135deg, var(--button-blue), var(--dark-blue));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            box-shadow: var(--shadow-md);
+        }
+
+        .elevator-pitch strong {
+            color: var(--white);
+        }
+
+        .value-prop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .value-prop-card {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .value-prop-card h4 {
+            margin-top: 0;
+            color: var(--primary-orange);
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .tabs {
+                display: none;
+            }
+
+            .tab-content {
+                display: block !important;
+                box-shadow: none;
+                page-break-after: always;
+            }
+
+            .header {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.875rem;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .value-prop-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Touchless Transactions</h1>
+            <p>Product Launch Messaging Engine</p>
+            <span class="subtitle">Internal Use Only • Q2 2026 Launch</span>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('fact-sheet')">Fact Sheet</button>
+            <button class="tab-button" onclick="showTab('messaging-matrix')">Messaging Matrix</button>
+            <button class="tab-button" onclick="showTab('creative-brief')">Creative Brief</button>
+        </div>
+
+        <!-- FACT SHEET TAB -->
+        <div id="fact-sheet" class="tab-content active">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <img src="hero_image.svg" alt="Touchless Transactions Hero" style="max-width: 100%; height: auto; border-radius: 12px;">
+            </div>
+
+            <h1>Touchless Transactions - Fact Sheet</h1>
+            <div class="internal-note">
+                <strong>Internal use only</strong> - do not share externally
+            </div>
+
+            <h2>Overview</h2>
+            <table>
+                <tr>
+                    <th>Product release/update name:</th>
+                    <td>Touchless Transactions</td>
+                </tr>
+                <tr>
+                    <th>JIRA #</th>
+                    <td>[To be added]</td>
+                </tr>
+                <tr>
+                    <th>Project ownership</th>
+                    <td>PM: [To be added] | PMM: Ethan</td>
+                </tr>
+            </table>
+
+            <h2>What</h2>
+            <table>
+                <tr>
+                    <th style="width: 40%;">Overview</th>
+                    <td>BILL is eliminating the need for employees to manually capture receipts by automatically pulling receipts from integrated sources and using AI to categorize transactions with business notes—no phone scans, no manual uploads, just done.</td>
+                </tr>
+            </table>
+
+            <h3>Key Features & Functionality</h3>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>1. Receipt Capture Integrations</h4>
+                    <p>Automatic receipt retrieval from Gmail, Lyft, Outlook (upcoming), Uber (upcoming), and text messages—employees never touch their phone to capture a receipt.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>2. AI-Powered Categorization</h4>
+                    <p>Machine learning model automatically categorizes transactions and creates accurate business notes the moment spending happens—no manual data entry.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>3. Zero-Touch Workflow</h4>
+                    <p>Employees spend, receipts appear, transactions are categorized, reports are ready—all without lifting a finger.</p>
+                </div>
+            </div>
+
+            <h3>Top Value Propositions</h3>
+            <ul>
+                <li><strong>Your employees never touch a receipt again.</strong> We're not making it easier—we're making it invisible.</li>
+                <li><strong>AI that actually works.</strong> High-accuracy categorization and business notes that CFOs and controllers can trust.</li>
+                <li><strong>Time back to what matters.</strong> What used to take 20 minutes of tedious work now happens automatically in seconds.</li>
+            </ul>
+
+            <h3>Limitations</h3>
+            <ul>
+                <li>Receipt capture integrations require employees to connect their Gmail/Outlook accounts or existing Lyft/Uber integrations</li>
+                <li>AI categorization accuracy depends on transaction data quality and company category rules</li>
+                <li>Text receipt capture requires SMS forwarding setup</li>
+            </ul>
+
+            <h3>Future Additions</h3>
+            <ul>
+                <li>Additional integrations (Amazon Business, other travel platforms)</li>
+                <li>Custom AI training based on company-specific categorization patterns</li>
+                <li>Receipt matching for invoices and multi-line item purchases</li>
+                <li>Mobile app notifications when AI needs clarification on unusual transactions</li>
+            </ul>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="integrations.svg" alt="Integration Partners" style="max-width: 100%; height: auto;">
+            </div>
+
+            <h2>Why</h2>
+            <div class="highlight-box">
+                <p><strong>Problem Statement:</strong> Every expense report starts with the same soul-crushing task: hunt down receipts. Employees dig through email, take photos of crumpled paper receipts, manually type in merchant names and categories. Finance teams chase down missing receipts for weeks. The entire industry has tried to make this easier with phone cameras and OCR—but we're eliminating the problem entirely.</p>
+            </div>
+
+            <h3>Functional Use Cases</h3>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="before_after.svg" alt="Before vs After Comparison" style="max-width: 100%; height: auto;">
+            </div>
+
+            <h4>Before & After: Sales Rep Uber Ride</h4>
+            <p><strong>Before:</strong> Sales rep takes an Uber to client meeting → gets email receipt → opens BILL app → takes screenshot of email → uploads to expense → manually categorizes as "Ground Transportation" → adds note "Client meeting - Acme Corp" → submits.</p>
+            <p><strong>After:</strong> Sales rep takes an Uber to client meeting → BILL automatically pulls receipt from Uber integration → AI categorizes as "Ground Transportation" → AI generates business note based on transaction context → expense is ready to submit. Done.</p>
+
+            <h4>Before & After: Marketing Team Lunch</h4>
+            <p><strong>Before:</strong> Marketing manager orders team lunch via DoorDash → email receipt arrives → saves receipt as PDF → uploads to BILL → types "Meals & Entertainment" → adds note "Team lunch Q4 planning" → manually enters tip amount → submits.</p>
+            <p><strong>After:</strong> Marketing manager orders team lunch → BILL pulls receipt from Gmail integration → AI auto-categorizes → business note auto-populated → receipt attached. Nothing to do.</p>
+
+            <h4>Before & After: Controller Month-End</h4>
+            <p><strong>Before:</strong> Controller spends 5 hours per month chasing down missing receipts, following up with employees, and correcting miscategorized expenses.</p>
+            <p><strong>After:</strong> Controller spends 30 minutes per month doing quick spot-checks. Everything else is already done.</p>
+
+            <h3>Competitive Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>Approach</th>
+                        <th>Employee Effort</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Expensify, Concur, Brex</strong></td>
+                        <td>Still require employees to take photos or forward receipts. Their AI categorizes after you capture—we eliminate the capture step entirely.</td>
+                        <td>Medium-High</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ramp, Divvy</strong></td>
+                        <td>Auto-categorization based on merchant codes, but employees still manually forward receipts and write business notes.</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BILL Touchless</strong></td>
+                        <td>We're the only platform that combines deep integrations (Gmail, Lyft, Uber, text) with AI that handles both receipt capture AND intelligent categorization with business notes.</td>
+                        <td><strong>Zero</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Why We're Better</h3>
+            <ul>
+                <li><strong>The industry's only true touchless receipt flow:</strong> Everyone else optimized the camera experience. We deleted the camera entirely.</li>
+                <li><strong>Integration-first approach:</strong> We pull from where receipts already live (email, apps) instead of making employees become data entry clerks.</li>
+                <li><strong>AI that does the thinking:</strong> Other platforms use AI to read receipts. Ours reads context, categorizes intelligently, and writes the business notes your finance team actually needs.</li>
+                <li><strong>Built for the finance team, not just employees:</strong> Controllers and CFOs get cleaner data, faster month-end close, and actual audit trails without chasing people down.</li>
+            </ul>
+
+            <h2>Who</h2>
+            <h3>Target Personas</h3>
+            <p><strong>Primary:</strong> AP Managers, Controllers, CFOs at companies with 20-500 employees who are drowning in expense report cleanup and month-end receipt chasing.</p>
+            <p><strong>Secondary:</strong> Employees who travel frequently, sales teams, remote teams, anyone who submits more than 3 expense reports per month.</p>
+
+            <h3>Primary Target Segments</h3>
+            <ul>
+                <li><strong>Segment 1:</strong> Growing companies (50-250 employees) with distributed teams where receipt compliance is a constant pain point.</li>
+                <li><strong>Segment 2:</strong> Companies already using BILL Spend & Expense who are frustrated with the manual receipt capture process.</li>
+                <li><strong>Segment 3:</strong> Finance leaders evaluating expense management solutions who are tired of chasing receipts and want AI that actually saves time.</li>
+            </ul>
+
+            <h2>How</h2>
+            <h3>For Admins</h3>
+            <ol>
+                <li>Enable Touchless Transactions in BILL settings</li>
+                <li>Set up company categorization rules (optional—AI works out of the box)</li>
+                <li>Invite employees to connect integrations (Gmail/Outlook, Lyft, Uber)</li>
+                <li>Turn on text receipt forwarding for employees who want it</li>
+            </ol>
+
+            <h3>For Employees</h3>
+            <ol>
+                <li>Connect Gmail or Outlook account in BILL app (one-time, 2 minutes)</li>
+                <li>Connect Lyft/Uber if used for business travel</li>
+                <li>Set up text forwarding for SMS receipts (optional)</li>
+                <li>Spend as usual—receipts and categorization happen automatically</li>
+            </ol>
+
+            <h3>Customer FAQs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Question</th>
+                        <th>Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>How accurate is the AI categorization?</strong></td>
+                        <td>Extremely high accuracy—our model learns from your company's existing categorization patterns and improves over time. Finance admins can review and adjust rules as needed.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What if the AI gets it wrong?</strong></td>
+                        <td>Employees and admins can easily edit any transaction. The AI learns from corrections to improve future categorizations.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Do employees have to connect their personal Gmail?</strong></td>
+                        <td>No—employees can use work email for receipt capture. Personal email is optional for those who use it for business purchases.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What integrations are available at launch?</strong></td>
+                        <td>Gmail, Lyft, and text receipts at launch. Outlook, Uber, and additional integrations coming soon.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Is this included in our current plan or additional cost?</strong></td>
+                        <td>[To be confirmed by Product/Pricing teams]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>How does this work for international transactions?</strong></td>
+                        <td>AI categorization works across currencies. Receipt capture integrations support major global email and travel platforms.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Can I turn this off for certain employees?</strong></td>
+                        <td>Yes—admins have full control over which teams use Touchless Transactions and which integrations are enabled.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Internal Audience FAQs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Question</th>
+                        <th>Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>How do we position this against competitors with "auto-categorization"?</strong></td>
+                        <td>We're the only platform that eliminates receipt capture entirely. Competitors make you take a photo, then AI categorizes. We pull receipts automatically AND categorize. Huge difference.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What's our win story against Expensify or Concur?</strong></td>
+                        <td>"With Expensify, employees still take photos and forward receipts. With BILL, we eliminated that entire step. Your team spends money, and it's already categorized with business notes attached. That's 10-15 hours per month back to your finance team."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Why not just use Gmail filters and spreadsheets?</strong></td>
+                        <td>"You could, but then you're still manually entering data, chasing receipts, and reconciling at month-end. Our AI doesn't just pull receipts—it categorizes, adds business context, and integrates with your accounting system. It's the difference between a filing cabinet and a CFO."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What launch tier is this?</strong></td>
+                        <td><strong>Tier 2 launch.</strong> Significant competitive differentiation and clear ROI for existing customers. Not a net-new product line, but a major feature that changes how customers experience BILL.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What sales plays should we run?</strong></td>
+                        <td>1) Upsell to existing BILL Spend & Expense customers frustrated with receipt management. 2) Competitive displacement against Expensify/Concur during renewal cycles. 3) New acquisition for high-growth companies scaling expense management.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>What metrics should we track?</strong></td>
+                        <td>• Adoption rate (% of employees who connect integrations)<br>• Receipt capture automation rate (% auto vs. manual)<br>• AI categorization accuracy and override rate<br>• Time saved per expense report<br>• Customer satisfaction scores</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MESSAGING MATRIX TAB -->
+        <div id="messaging-matrix" class="tab-content">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <img src="value_props.svg" alt="Key Value Propositions" style="max-width: 100%; height: auto;">
+            </div>
+
+            <h1>Messaging Brief: Touchless Transactions</h1>
+            <div class="internal-note">
+                <strong>Internal messaging</strong> - Do not share this document or its contents with customers or prospects.
+            </div>
+
+            <h2>Overview</h2>
+            <p>The entire expense management industry has worked toward making receipt capture easier—better cameras, faster OCR, smarter apps. BILL is doing something radically different: we're eliminating receipt capture entirely. With Touchless Transactions, employees never touch a receipt again. We automatically pull receipts from where they already exist (Gmail, Lyft, Uber, text messages) and use AI to categorize transactions with business notes the moment spending happens. What used to take 20 minutes of tedious work per expense report now happens automatically in seconds.</p>
+
+            <div class="elevator-pitch">
+                <strong>Elevator Pitch:</strong> BILL Touchless Transactions eliminates the most hated part of expense reports—receipt capture. We automatically pull receipts from email and apps, then use AI to categorize and add business notes. Your employees spend money. We do everything else. That's 10-15 hours per month back to your finance team.
+            </div>
+
+            <h2>Problem Statement</h2>
+            <p>Expense reports suck because of one thing: receipts. Employees hunt through email, photograph crumpled paper, and manually type merchant names. Finance teams spend hours chasing down missing receipts. Controllers delay month-end close waiting for that one sales rep to submit their Uber receipts from three weeks ago.</p>
+
+            <p>The entire industry tried to solve this with phone cameras and OCR. But making receipt capture "easier" still means employees are spending 15-20 minutes per expense report on data entry. Finance teams are still playing receipt detective.</p>
+
+            <p><strong>The problem isn't that receipt capture is hard. The problem is that it exists at all.</strong></p>
+
+            <h3>Old Process</h3>
+            <ul>
+                <li><strong>Employees:</strong> Get receipt via email or paper → Open expense app → Take photo or upload PDF → Manually select category → Type business purpose → Submit → Repeat for every single transaction</li>
+                <li><strong>Finance Teams:</strong> Review submitted expenses → Chase down missing receipts → Correct miscategorized transactions → Manually add missing business context → Follow up with employees who forget → Delay month-end close</li>
+                <li><strong>Result:</strong> 10-15 hours per month of pure administrative waste. Frustrated employees. Controllers who spend more time on expense cleanup than actual financial analysis.</li>
+            </ul>
+
+            <h2>Solution and Messaging (Customer Facing)</h2>
+            <div class="highlight-box">
+                <p><strong>BILL Touchless Transactions makes receipt capture invisible.</strong> We automatically retrieve receipts from Gmail, Lyft, Uber, Outlook, and text messages—no manual uploads, no phone cameras, no data entry. Then our AI categorizes every transaction and adds business notes the moment spending happens.</p>
+                <p><strong>Your employees spend money. We handle the rest.</strong></p>
+            </div>
+
+            <h3>Value Propositions</h3>
+            <ul>
+                <li><strong>Your team never touches a receipt again.</strong> We're not making it easier—we're making it disappear. No photos, no forwarding, no uploads. Just done.</li>
+                <li><strong>AI that actually saves time.</strong> High-accuracy auto-categorization and intelligent business notes that finance teams can trust. Not AI for AI's sake—AI that gives you 10-15 hours back every month.</li>
+                <li><strong>Expense reports that fill themselves out.</strong> Employees spend. Receipts appear. Categories are assigned. Business notes are written. Reports are ready to submit. All automatic.</li>
+                <li><strong>Month-end close that doesn't wait on receipts.</strong> No more chasing down missing receipts. No more follow-up emails. No more delays. Clean data, complete documentation, audit-ready reports.</li>
+                <li><strong>The only truly touchless expense workflow.</strong> Everyone else optimized the camera. We deleted it entirely.</li>
+            </ul>
+
+            <h3>Positioning Statement</h3>
+            <div class="highlight-box">
+                <p><strong>For finance leaders at growing companies</strong> who waste hours every month chasing receipts and cleaning up expense reports, <strong>BILL Touchless Transactions</strong> is the only expense management solution that eliminates manual receipt capture entirely. <strong>Unlike Expensify, Concur, Ramp, and Brex—which still require employees to take photos or forward receipts—BILL automatically retrieves receipts from email and integrated apps, then uses AI to categorize transactions and add business notes without any employee effort.</strong> The result: 10-15 hours per month back to your finance team, faster month-end close, and expense reports that actually fill themselves out.</p>
+            </div>
+
+            <hr>
+
+            <h2>Audience-Specific Messaging</h2>
+
+            <h3>1. CFO</h3>
+            <h4>What They Care About</h4>
+            <ul>
+                <li>Month-end close speed and accuracy</li>
+                <li>Audit readiness and compliance</li>
+                <li>Finance team capacity and efficiency</li>
+                <li>Data quality for financial reporting</li>
+                <li>Reducing administrative overhead</li>
+            </ul>
+
+            <div class="elevator-pitch">
+                <strong>Primary Message:</strong> "Get 10-15 hours per month back to your finance team—and close your books faster."
+            </div>
+
+            <h4>3 Value Props with Proof</h4>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>Faster month-end close</h4>
+                    <p><strong>Proof:</strong> No more chasing employees for missing receipts. All expenses are documented automatically the moment spending happens. Controllers spend time on analysis, not receipt detective work.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Audit-ready documentation</h4>
+                    <p><strong>Proof:</strong> Every transaction has a receipt, category, and business note—automatically. Complete audit trails with zero employee training or reminder emails.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Finance team capacity</h4>
+                    <p><strong>Proof:</strong> What used to take 10-15 hours per month (receipt chasing, categorization cleanup, data entry fixes) now happens automatically. Your team analyzes spending patterns instead of fixing expense reports.</p>
+                </div>
+            </div>
+
+            <h4>Objections & Responses</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Objection</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"Our current system works fine."</td>
+                        <td>"Does it? Or does your team spend 10+ hours per month chasing receipts and fixing categorizations? Touchless Transactions gives you that time back—automatically."</td>
+                    </tr>
+                    <tr>
+                        <td>"AI categorization sounds risky. What if it's wrong?"</td>
+                        <td>"High accuracy out of the box, and your team maintains full control. The AI learns from your categorization rules and gets smarter over time. Plus, admins can review and adjust anything."</td>
+                    </tr>
+                    <tr>
+                        <td>"We just implemented [Expensify/Concur]. I'm not ripping it out."</td>
+                        <td>"Keep it if you want. But ask yourself: are your employees still taking photos of receipts? Are you still chasing missing documentation? BILL eliminates that entirely. When your renewal comes up, let's talk."</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>15-Second Elevator Pitch:</strong> "Touchless Transactions gives your finance team 10-15 hours per month back by eliminating receipt capture entirely. We auto-pull receipts from email and apps, then AI categorizes everything. Your team closes books faster instead of chasing receipts."</p>
+
+            <hr>
+
+            <h3>2. AP Manager / Controller</h3>
+            <h4>What They Care About</h4>
+            <ul>
+                <li>Getting employees to actually submit complete expense reports</li>
+                <li>Reducing time spent on receipt follow-up</li>
+                <li>Accurate categorization for budget tracking</li>
+                <li>Meeting tight month-end deadlines</li>
+                <li>Preventing policy violations and non-compliant spending</li>
+            </ul>
+
+            <div class="elevator-pitch">
+                <strong>Primary Message:</strong> "Stop chasing receipts. Touchless Transactions does the work employees forget to do."
+            </div>
+
+            <h4>3 Value Props with Proof</h4>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>No more receipt follow-up</h4>
+                    <p><strong>Proof:</strong> Receipts are captured automatically from email and apps before employees even open the expense tool. No manual uploads, no reminders, no chasing.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Trusted categorization</h4>
+                    <p><strong>Proof:</strong> AI categorizes based on your company's existing rules and patterns. Controllers review exceptions, not every single transaction. 90%+ accuracy out of the box.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>No waiting on stragglers</h4>
+                    <p><strong>Proof:</strong> Expenses are documented and categorized in real-time as spending happens. No more waiting for that one sales rep to submit receipts from last month's travel.</p>
+                </div>
+            </div>
+
+            <p><strong>15-Second Elevator Pitch:</strong> "Touchless Transactions eliminates the receipt chasing you do every month. We auto-pull receipts from email and apps, AI categorizes everything, and you review exceptions instead of fixing every expense. Hours back to your calendar every week."</p>
+
+            <hr>
+
+            <h3>3. Controller (Small Business / High-Growth Startup)</h3>
+            <h4>What They Care About</h4>
+            <ul>
+                <li>Scaling financial operations without adding headcount</li>
+                <li>Clean data for investor reporting and board decks</li>
+                <li>Spending visibility and budget control</li>
+                <li>Avoiding expensive enterprise tools that require IT support</li>
+                <li>Automating repetitive work so they can focus on strategic finance</li>
+            </ul>
+
+            <div class="elevator-pitch">
+                <strong>Primary Message:</strong> "Scale expense management without hiring more people or chasing receipts."
+            </div>
+
+            <h4>3 Value Props with Proof</h4>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>Grow without growing workload</h4>
+                    <p><strong>Proof:</strong> Whether you have 20 employees or 200, Touchless Transactions handles receipt capture and categorization automatically. No additional admin burden as you scale.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Real-time visibility</h4>
+                    <p><strong>Proof:</strong> Expenses are categorized and documented the moment spending happens. Budget reports are accurate and up-to-date without month-end scrambles.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Investor-ready data</h4>
+                    <p><strong>Proof:</strong> Complete audit trails, accurate categorization, and clean expense data—without implementing Concur or hiring a finance operations manager.</p>
+                </div>
+            </div>
+
+            <p><strong>15-Second Elevator Pitch:</strong> "Touchless Transactions scales expense management as you grow—without adding finance headcount. We auto-capture receipts and categorize expenses so you spend time on strategic finance, not receipt chasing."</p>
+
+            <hr>
+
+            <h3>4. IT / Systems Administrator</h3>
+            <h4>What They Care About</h4>
+            <ul>
+                <li>Security and data privacy</li>
+                <li>Integration complexity and maintenance burden</li>
+                <li>User adoption and support tickets</li>
+                <li>Compliance with company policies</li>
+                <li>Minimizing ongoing IT involvement</li>
+            </ul>
+
+            <div class="elevator-pitch">
+                <strong>Primary Message:</strong> "Secure integrations that work out of the box—no IT babysitting required."
+            </div>
+
+            <h4>3 Value Props with Proof</h4>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>Enterprise-grade security</h4>
+                    <p><strong>Proof:</strong> Gmail and Outlook integrations use OAuth 2.0—employees control access, IT maintains visibility, and BILL never stores credentials. Same security standards as Google Workspace and Microsoft 365.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Zero maintenance</h4>
+                    <p><strong>Proof:</strong> Pre-built integrations with Gmail, Outlook, Lyft, Uber work out of the box. No engineering resources, no API keys to manage, no ongoing maintenance.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Fewer support tickets</h4>
+                    <p><strong>Proof:</strong> Employees don't ask "How do I upload a receipt?" or "Where did I save that PDF?" because receipts are already captured. Fewer "I can't find my receipt" help desk tickets.</p>
+                </div>
+            </div>
+
+            <p><strong>15-Second Elevator Pitch:</strong> "Touchless Transactions uses secure OAuth integrations—no custom code, no maintenance, no ongoing IT support. Employees connect once, and receipt capture happens automatically. Fewer help desk tickets, more time back to IT."</p>
+
+            <hr>
+
+            <h2>Internal Alignment</h2>
+
+            <h3>For Sales Teams</h3>
+            <p><strong>Key Talk Track:</strong> "Most expense tools make receipt capture easier. BILL makes it invisible. Your employees spend money—we pull receipts from email and apps, AI categorizes everything, and expense reports fill themselves out. That's 10-15 hours per month back to finance teams who used to chase receipts."</p>
+
+            <h4>Discovery Questions</h4>
+            <ul>
+                <li>How much time does your finance team spend chasing missing receipts every month?</li>
+                <li>What percentage of expense reports are submitted late or incomplete?</li>
+                <li>Does month-end close get delayed waiting on expense documentation?</li>
+                <li>Are your employees frustrated with manual receipt capture and data entry?</li>
+                <li>What expense management system are you using today, and what's working / not working?</li>
+            </ul>
+
+            <h4>Competitive Battle Cards</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>Battle Card</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>vs. Expensify</strong></td>
+                        <td>"Expensify has the best receipt camera in the industry. BILL eliminates the camera entirely. We auto-pull receipts from email and apps—employees never take a photo."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vs. Concur</strong></td>
+                        <td>"Concur is built for massive enterprises with dedicated expense admins. You don't have that. BILL Touchless Transactions is built for growing companies—automation without enterprise complexity."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vs. Ramp/Brex</strong></td>
+                        <td>"Ramp and Brex have smart corporate cards with auto-categorization. But employees still forward receipts manually. BILL pulls receipts automatically from Gmail, Outlook, Lyft, Uber—zero employee effort."</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>For Customer Success Teams</h3>
+            <h4>Adoption Playbook</h4>
+
+            <p><strong>Week 1: Admin Setup</strong></p>
+            <ul>
+                <li>Finance admin enables Touchless Transactions in BILL settings</li>
+                <li>Set up company categorization rules (or use BILL defaults)</li>
+                <li>Review integration options (Gmail, Outlook, Lyft, Uber, SMS)</li>
+            </ul>
+
+            <p><strong>Week 2-3: Employee Rollout</strong></p>
+            <ul>
+                <li>Send employee announcement email (template provided)</li>
+                <li>Host optional "Lunch & Learn" to walk through integration setup (5 minutes)</li>
+                <li>Provide one-pager with setup instructions and FAQs</li>
+            </ul>
+
+            <p><strong>Week 4: Monitor & Optimize</strong></p>
+            <ul>
+                <li>Review adoption metrics (% of employees with integrations connected)</li>
+                <li>Check AI categorization accuracy and adjust rules if needed</li>
+                <li>Gather feedback from early adopters and address concerns</li>
+            </ul>
+
+            <h4>Success Metrics to Track</h4>
+            <ul>
+                <li>Integration connection rate (target: 70%+ within 30 days)</li>
+                <li>Receipt automation rate (target: 80%+ auto-captured vs. manual)</li>
+                <li>AI categorization accuracy (target: 90%+)</li>
+                <li>Time saved per expense report (target: 15+ minutes)</li>
+                <li>Employee satisfaction with expense process (NPS or survey)</li>
+            </ul>
+
+            <hr>
+
+            <h2>GTMS Deliverables</h2>
+
+            <h3>Website Links</h3>
+            <ul>
+                <li>Product landing page: bill.com/touchless-transactions</li>
+                <li>Feature announcement blog post</li>
+                <li>Release notes (Help Center)</li>
+                <li>Help Center articles (setup, troubleshooting, best practices)</li>
+                <li>SEO keywords: automatic receipt capture, touchless expense management, AI expense categorization</li>
+            </ul>
+
+            <h3>Content Resources</h3>
+            <ul>
+                <li>Product demo video (60-90 seconds): before/after workflow comparison</li>
+                <li>One-pager for finance leaders (CFO/Controller focus)</li>
+                <li>Sales deck (integrated into main BILL pitch deck)</li>
+                <li>Email templates (announcement, nurture sequence, customer upsell)</li>
+                <li>ROI calculator (time savings per employee/month)</li>
+            </ul>
+
+            <h3>Campaign Themes</h3>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>"Stop Chasing Receipts"</h4>
+                    <p>Problem-focused, finance leader pain point</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"Expense Reports That Fill Themselves Out"</h4>
+                    <p>Outcome-focused, aspirational</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"The End of Receipt Capture"</h4>
+                    <p>Category innovation, bold claim</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"AI That Actually Saves Time"</h4>
+                    <p>Differentiation against AI hype</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CREATIVE BRIEF TAB -->
+        <div id="creative-brief" class="tab-content">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <img src="hero_image.svg" alt="Touchless Transactions Concept" style="max-width: 100%; height: auto; border-radius: 12px;">
+            </div>
+
+            <h1>Touchless Transactions - Creative Brief & Copy Doc</h1>
+
+            <table>
+                <tr>
+                    <th>ASANA PROJECT TICKET:</th>
+                    <td>[URL to be added]</td>
+                </tr>
+                <tr>
+                    <th>PROJECT DRIVER:</th>
+                    <td>Ethan (PMM)</td>
+                </tr>
+                <tr>
+                    <th>CREATIVE TEAM:</th>
+                    <td>Project manager: [TBD] | Copy: [TBD] | Design: [TBD]</td>
+                </tr>
+            </table>
+
+            <h2>Copy Review Status</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Reviewer</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product (PM)</td>
+                        <td>Not started</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Legal</td>
+                        <td>Not started</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Brand/Creative</td>
+                        <td>Not started</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Sales Enablement</td>
+                        <td>Not started</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Project Overview</h2>
+
+            <h3>Goals</h3>
+            <div class="highlight-box">
+                <p><strong>Primary Goal:</strong> Drive adoption of Touchless Transactions among existing BILL Spend & Expense customers and position BILL as the only truly touchless expense management platform.</p>
+
+                <p><strong>KPIs to Impact:</strong></p>
+                <ul>
+                    <li>Feature adoption rate: 50%+ of BILL Spend & Expense customers enable Touchless Transactions within 90 days of launch</li>
+                    <li>Integration connection rate: 70%+ of employees connect at least one receipt integration within 30 days</li>
+                    <li>Competitive win rate: Increase against Expensify, Concur, Ramp, Brex</li>
+                    <li>Time-to-value: Reduce time spent on expense report creation by 15+ minutes per report</li>
+                    <li>Customer satisfaction: Increase NPS for BILL Spend & Expense by 10+ points post-launch</li>
+                </ul>
+
+                <p><strong>Perception to Establish:</strong> "BILL doesn't just make expense management easier—we eliminate the parts that suck. While competitors optimize the camera, BILL deleted receipt capture entirely. This is AI that actually saves time, not AI for AI's sake."</p>
+            </div>
+
+            <h3>Audience</h3>
+            <p><strong>Primary Audience:</strong></p>
+            <ul>
+                <li>Current BILL Spend & Expense customers (upsell/feature adoption)</li>
+                <li>Finance leaders (CFO, Controller, AP Manager) at mid-market companies (50-500 employees)</li>
+                <li>Companies evaluating expense management platforms (competitive displacement)</li>
+            </ul>
+
+            <p><strong>Job-to-be-Done:</strong> "When I'm managing expenses for my company, I want my team to spend zero time on receipt capture and data entry, so we can close books faster and my finance team can focus on strategic work instead of chasing receipts."</p>
+
+            <h3>Creative/Content & POV</h3>
+            <p><strong>Unique Angle:</strong> Every expense management platform claims "AI" and "automation." They all optimized receipt scanning. BILL did something radically different: we eliminated the need to scan receipts at all. This is the industry's first truly touchless expense workflow—from transaction to categorized, documented expense without a single employee action.</p>
+
+            <p><strong>Point of View:</strong> "The problem with expense management isn't that receipt capture is hard—it's that it exists at all. Receipts already live in your email and apps. Why make employees become data entry clerks? BILL pulls receipts automatically, AI categorizes intelligently, and your team gets 10-15 hours per month back. That's not easier. That's invisible."</p>
+
+            <h3>Channel/Distribution</h3>
+            <p><strong>Launch Channels:</strong></p>
+            <ul>
+                <li>Email campaign to existing BILL Spend & Expense customers</li>
+                <li>Product landing page (bill.com/touchless-transactions)</li>
+                <li>In-app promotion (banner, Pendo guide, feature spotlight)</li>
+                <li>Sales enablement (deck, one-pager, battle cards)</li>
+                <li>Webinar series (demo + Q&A)</li>
+                <li>Organic social (LinkedIn, Twitter/X)</li>
+                <li>Paid social (LinkedIn ads targeting finance leaders)</li>
+                <li>Blog post (SEO + thought leadership)</li>
+                <li>Customer success outreach (CSM-led adoption plays)</li>
+            </ul>
+
+            <h2>Messaging Hierarchy</h2>
+
+            <div class="elevator-pitch">
+                <strong>Primary Message:</strong> Your employees never touch a receipt again. BILL Touchless Transactions eliminates receipt capture entirely—we pull from email and apps, AI categorizes everything, and expense reports fill themselves out.
+            </div>
+
+            <h3>Secondary Messages</h3>
+            <ol>
+                <li><strong>AI that actually saves time:</strong> 10-15 hours per month back to your finance team. Not AI for AI's sake—AI that works.</li>
+                <li><strong>The only truly touchless workflow:</strong> Everyone else optimized the camera. We deleted it.</li>
+                <li><strong>Faster month-end close without chasing receipts:</strong> Real-time expense documentation without manual follow-up.</li>
+            </ol>
+
+            <h2>Tone & Voice</h2>
+            <p>Following BILL.com's brand voice with Ethan's authentic, conversational style:</p>
+
+            <h3>Voice Principles</h3>
+            <ul>
+                <li><strong>Confidently helpful, not corporate:</strong> Sound like a smart finance leader explaining this to a peer over coffee, not a press release</li>
+                <li><strong>Problem-focused before solution-focused:</strong> Lead with the pain (receipt chasing sucks) before the feature (AI categorization)</li>
+                <li><strong>Concrete, not abstract:</strong> Use specific time savings ("10-15 hours per month") instead of vague claims ("more efficient")</li>
+                <li><strong>Straight-talking, not hyperbolic:</strong> We eliminated receipt capture—that's radical enough without overselling</li>
+            </ul>
+
+            <h3>Examples of Voice in Action</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">❌ Corporate/Generic</th>
+                        <th style="width: 50%;">✅ BILL Voice</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"BILL's innovative Touchless Transactions feature leverages advanced AI technology to streamline expense management workflows and enhance operational efficiency."</td>
+                        <td>"The entire industry tried to make receipt capture easier. BILL eliminated it entirely. Your employees spend money, and we do everything else."</td>
+                    </tr>
+                    <tr>
+                        <td>"Our solution provides significant time savings for finance professionals through automated processes."</td>
+                        <td>"Finance teams spend 10-15 hours per month chasing receipts. Touchless Transactions gives you that time back—automatically."</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2>Asset Checklist & Copy</h2>
+
+            <h3>Product Landing Page</h3>
+
+            <h4>Hero Section</h4>
+            <p><strong>Headline (H1):</strong> Stop chasing receipts. Start closing books faster.</p>
+            <p><strong>Subheadline:</strong> BILL Touchless Transactions eliminates the worst part of expense reports—manual receipt capture. We automatically pull receipts from email and apps, AI categorizes everything, and your team gets 10-15 hours per month back.</p>
+            <p><strong>CTA Primary:</strong> See How It Works</p>
+            <p><strong>CTA Secondary:</strong> Talk to Sales</p>
+
+            <h4>Problem Section</h4>
+            <p><strong>Headline:</strong> Every expense report starts with the same problem: receipts.</p>
+            <p><strong>Body Copy:</strong> Employees hunt through email, photograph crumpled paper, manually type merchant names and categories. Finance teams spend hours chasing down missing documentation. Controllers delay month-end close waiting for receipts from three weeks ago.</p>
+            <p>The entire industry tried to solve this with better phone cameras and OCR. But making receipt capture "easier" still means work.</p>
+            <p>BILL asked a different question: <strong>What if receipt capture didn't exist at all?</strong></p>
+
+            <h4>Solution Section</h4>
+            <p><strong>Headline:</strong> Your employees never touch a receipt again.</p>
+            <p><strong>Subheadline:</strong> Touchless Transactions makes receipt capture invisible.</p>
+
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>Automatic Receipt Capture</h4>
+                    <p>Receipts already live in your email and apps. We pull them automatically from Gmail, Outlook, Lyft, Uber, and text messages—before employees even think about expense reports.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>AI-Powered Categorization</h4>
+                    <p>Our AI categorizes transactions instantly based on merchant, amount, and your company's existing patterns. No manual selection. No data entry. Just done.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Intelligent Business Notes</h4>
+                    <p>AI generates contextually relevant business notes automatically—saving employees from typing "Client meeting" or "Team lunch" over and over.</p>
+                </div>
+            </div>
+
+            <h4>Value Props Section</h4>
+            <p><strong>Headline:</strong> What you get back</p>
+
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>10-15 Hours Per Month</h4>
+                    <p>Time your finance team spent chasing receipts and cleaning up categorizations—now back on their calendar for strategic work.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Faster Month-End Close</h4>
+                    <p>No more waiting on missing receipts. Expenses are documented in real-time as spending happens.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Audit-Ready Documentation</h4>
+                    <p>Every transaction has a receipt, category, and business note—automatically. Complete audit trails without reminder emails.</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>Expense Reports That Fill Themselves Out</h4>
+                    <p>Employees spend. Receipts appear. Categories assigned. Business notes written. Reports ready to submit. All automatic.</p>
+                </div>
+            </div>
+
+            <h4>Competitive Differentiation</h4>
+            <p><strong>Headline:</strong> The only truly touchless expense workflow</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Expensify</th>
+                        <th>Concur</th>
+                        <th>Ramp/Brex</th>
+                        <th>BILL Touchless</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Receipt Capture</strong></td>
+                        <td>Manual photo</td>
+                        <td>Manual photo/email</td>
+                        <td>Manual forward</td>
+                        <td><strong>Automatic from email/apps</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Categorization</strong></td>
+                        <td>After upload</td>
+                        <td>After upload</td>
+                        <td>Merchant code only</td>
+                        <td><strong>Real-time with context</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Notes</strong></td>
+                        <td>Manual entry</td>
+                        <td>Manual entry</td>
+                        <td>Manual entry</td>
+                        <td><strong>AI-generated</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Employee Effort</strong></td>
+                        <td>Medium</td>
+                        <td>High</td>
+                        <td>Medium</td>
+                        <td><strong>Zero</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <p><strong>"Everyone else optimized the camera. We deleted it."</strong></p>
+            </div>
+
+            <hr>
+
+            <h3>Email Announcement (To Existing Customers)</h3>
+
+            <p><strong>Subject Line Options:</strong></p>
+            <ol>
+                <li>Your employees never have to touch a receipt again</li>
+                <li>We just eliminated the worst part of expense reports</li>
+                <li>New: Touchless Transactions (finally, expense reports that fill themselves out)</li>
+            </ol>
+
+            <p><strong>Pre-Header:</strong> BILL now auto-captures receipts and categorizes expenses—zero employee effort</p>
+
+            <p><strong>Email Body:</strong></p>
+            <div class="highlight-box">
+                <p>Hey [First Name],</p>
+
+                <p>Quick question: how much time does your team spend chasing missing receipts every month?</p>
+
+                <p>If you're like most finance leaders, the answer is somewhere between "way too much" and "I don't even want to think about it."</p>
+
+                <p>Here's why —</p>
+
+                <p>The entire expense management industry has worked toward making receipt capture <em>easier</em>. Better mobile apps. Faster cameras. Smarter OCR.</p>
+
+                <p>BILL just did something different: <strong>we eliminated receipt capture entirely.</strong></p>
+
+                <p><strong>Introducing Touchless Transactions</strong></p>
+
+                <p>Your employees spend money. We pull receipts automatically from email and apps (Gmail, Lyft, Uber, Outlook). AI categorizes everything and adds business notes. Expense reports fill themselves out.</p>
+
+                <p>That's 10-15 hours per month back to your finance team.</p>
+
+                <p><strong>Here's how it works:</strong></p>
+                <ul>
+                    <li>Employees connect Gmail, Outlook, or travel apps (one time, 2 minutes)</li>
+                    <li>They spend as usual—no behavior change</li>
+                    <li>BILL automatically retrieves receipts before they even open the app</li>
+                    <li>AI categorizes transactions and generates business notes</li>
+                    <li>Employees review and submit—done</li>
+                </ul>
+
+                <p><strong>What you get:</strong></p>
+                <ul>
+                    <li>✓ No more chasing receipts</li>
+                    <li>✓ Faster month-end close</li>
+                    <li>✓ Audit-ready documentation without reminder emails</li>
+                    <li>✓ Clean expense data without manual cleanup</li>
+                </ul>
+
+                <p>This isn't AI for AI's sake. This is AI that actually saves time.</p>
+
+                <p><strong>[CTA Button: See How It Works]</strong></p>
+
+                <p>Want to see it in action? [Schedule a quick demo here] or reply to this email with questions.</p>
+
+                <p>Stoked to show you this.</p>
+
+                <p>[Signature]</p>
+
+                <p>P.S. — We didn't optimize the receipt camera. We deleted it.</p>
+            </div>
+
+            <hr>
+
+            <h3>Social Media Posts (LinkedIn/X)</h3>
+
+            <h4>Post 1: Launch Announcement</h4>
+            <div class="highlight-box">
+                <p>We just eliminated the worst part of expense reports.</p>
+
+                <p>BILL Touchless Transactions automatically pulls receipts from email and apps, AI categorizes everything, and expense reports fill themselves out.</p>
+
+                <p>Your finance team gets 10-15 hours per month back.</p>
+
+                <p>No more chasing receipts. No more manual data entry. Just done.</p>
+
+                <p>Learn more → [link]</p>
+            </div>
+
+            <h4>Post 2: Problem-Focused</h4>
+            <div class="highlight-box">
+                <p>Finance leaders: how much time does your team spend chasing missing receipts every month?</p>
+
+                <p>10-15 hours on average.</p>
+
+                <p>Following up with employees. Correcting categorizations. Delaying month-end close.</p>
+
+                <p>What if receipt capture didn't exist at all?</p>
+
+                <p>That's what we built → [link]</p>
+            </div>
+
+            <h4>Post 3: Differentiation-Focused</h4>
+            <div class="highlight-box">
+                <p>Every expense platform optimized the receipt camera.</p>
+
+                <p>BILL deleted it.</p>
+
+                <p>Touchless Transactions automatically pulls receipts from Gmail, Lyft, Uber, and Outlook. AI categorizes. Business notes auto-generated.</p>
+
+                <p>Zero employee effort.</p>
+
+                <p>See how it works → [link]</p>
+            </div>
+
+            <hr>
+
+            <h3>One-Pager (Sales Enablement)</h3>
+
+            <p><strong>Headline:</strong> Stop Chasing Receipts. Start Closing Books Faster.</p>
+            <p><strong>Subheadline:</strong> BILL Touchless Transactions eliminates manual receipt capture entirely.</p>
+
+            <p><strong>The Problem:</strong> Finance teams spend 10-15 hours per month chasing missing receipts, cleaning up miscategorized expenses, and following up with employees. Month-end close gets delayed. Employees hate manual data entry.</p>
+
+            <p><strong>The Solution:</strong> BILL Touchless Transactions automatically retrieves receipts from email and apps (Gmail, Outlook, Lyft, Uber), uses AI to categorize transactions with business notes, and eliminates employee effort entirely.</p>
+
+            <p><strong>How It Works:</strong></p>
+            <ol>
+                <li><strong>Employees connect once:</strong> Gmail, Outlook, or travel apps (2 minutes)</li>
+                <li><strong>They spend as usual:</strong> No behavior change</li>
+                <li><strong>BILL does the rest:</strong> Auto-pull receipts → AI categorizes → Business notes added → Ready to submit</li>
+            </ol>
+
+            <p><strong>ROI Snapshot (100-employee company):</strong></p>
+            <ul>
+                <li>Time saved: 15+ hours per month (finance team)</li>
+                <li>Faster close: 2-3 days sooner without receipt delays</li>
+                <li>Employee satisfaction: Eliminate the #1 expense report complaint</li>
+            </ul>
+
+            <hr>
+
+            <h2>Campaign Themes</h2>
+            <div class="value-prop-grid">
+                <div class="value-prop-card">
+                    <h4>"Stop Chasing Receipts"</h4>
+                    <p>Problem-focused, finance leader pain point</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"Expense Reports That Fill Themselves Out"</h4>
+                    <p>Outcome-focused, aspirational</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"The End of Receipt Capture"</h4>
+                    <p>Category innovation, bold claim</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"AI That Actually Saves Time"</h4>
+                    <p>Differentiation against AI hype</p>
+                </div>
+                <div class="value-prop-card">
+                    <h4>"Touchless. Finally."</h4>
+                    <p>Simplicity, relief, category shift</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--light-orange); border-radius: var(--radius);">
+                <h3 style="margin: 0; color: var(--primary-orange);">END OF CREATIVE BRIEF</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let content of tabContents) {
+                content.classList.remove('active');
+            }
+
+            // Remove active class from all buttons
+            const tabButtons = document.getElementsByClassName('tab-button');
+            for (let button of tabButtons) {
+                button.classList.remove('active');
+            }
+
+            // Show selected tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
