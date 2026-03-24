@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaction Agent - Sizzle Video Prototype</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #video-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scene {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .scene.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Scene backgrounds */
+  .scene-dark { background: #0a0a0a; }
+  .scene-blue { background: linear-gradient(135deg, #0066FF 0%, #0044CC 100%); }
+  .scene-white { background: #f8f9fa; color: #111; }
+  .scene-gradient { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
+
+  /* Typography */
+  .hero-text {
+    font-size: clamp(28px, 5vw, 64px);
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.15;
+    max-width: 900px;
+    padding: 0 40px;
+  }
+
+  .sub-text {
+    font-size: clamp(18px, 2.5vw, 32px);
+    font-weight: 600;
+    text-align: center;
+    max-width: 700px;
+    padding: 0 40px;
+    opacity: 0.9;
+  }
+
+  .stat-text {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 900;
+    text-align: center;
+    letter-spacing: -2px;
+  }
+
+  .stat-label {
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.7;
+    margin-top: 8px;
+  }
+
+  /* Animated lines */
+  .line-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .line-stack .line {
+    font-size: clamp(20px, 3.5vw, 44px);
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+  }
+
+  .line-stack .line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .line-stack .line.exit {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+  }
+
+  /* Pillar text */
+  .pillar-text {
+    font-size: clamp(24px, 4vw, 56px);
+    font-weight: 900;
+    text-align: center;
+    padding: 0 40px;
+  }
+
+  .pillar-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  /* Transaction drawer mockup */
+  .transaction-drawer {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    width: min(500px, 85vw);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    color: #111;
+  }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .merchant-logo {
+    width: 40px;
+    height: 40px;
+    background: #0066FF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .merchant-info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .merchant-info span {
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  .drawer-amount {
+    font-size: 24px;
+    font-weight: 900;
+    color: #111;
+    margin-left: auto;
+  }
+
+  .drawer-field {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .field-label {
+    font-size: 13px;
+    color: #6b7280;
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  .field-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.5s ease;
+  }
+
+  .field-value.filled {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .field-empty {
+    width: 120px;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .field-empty.gone {
+    width: 0;
+    opacity: 0;
+  }
+
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #EEF2FF;
+    color: #4F46E5;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-badge.show { opacity: 1; }
+
+  .receipt-attach {
+    margin-top: 16px;
+    padding: 12px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #9ca3af;
+    transition: all 0.5s ease;
+  }
+
+  .receipt-attach.attached {
+    border-color: #10b981;
+    border-style: solid;
+    background: #f0fdf4;
+    color: #065f46;
+  }
+
+  /* Dial / progress arc */
+  .dial-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+
+  .dial-svg {
+    width: 300px;
+    height: 300px;
+    transform: rotate(-90deg);
+  }
+
+  .dial-track {
+    fill: none;
+    stroke: #1a1a2e;
+    stroke-width: 12;
+  }
+
+  .dial-fill {
+    fill: none;
+    stroke: #0066FF;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 565;
+    stroke-dashoffset: 565;
+    transition: stroke-dashoffset 3s ease-in-out;
+    filter: drop-shadow(0 0 8px rgba(0,102,255,0.5));
+  }
+
+  .dial-fill.animate {
+    stroke-dashoffset: 140;
+  }
+
+  .dial-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .dial-percent {
+    font-size: 48px;
+    font-weight: 900;
+  }
+
+  .dial-word {
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+
+  /* Integration pills */
+  .integrations {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .int-pill {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s ease;
+  }
+
+  .int-pill.on {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0,102,255,0.3);
+    border: 1px solid rgba(0,102,255,0.5);
+  }
+
+  /* Settings toggles mockup */
+  .settings-panel {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    width: min(420px, 85vw);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    color: #111;
+  }
+
+  .settings-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #111;
+  }
+
+  .setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .setting-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .toggle {
+    width: 44px;
+    height: 24px;
+    background: #d1d5db;
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.3s ease;
+    cursor: pointer;
+  }
+
+  .toggle.on { background: #0066FF; }
+
+  .toggle::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .toggle.on::after { transform: translateX(20px); }
+
+  /* End card */
+  .bill-logo {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #0066FF;
+  }
+
+  .agent-name {
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 600;
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  .included-text {
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 400;
+    margin-top: 24px;
+    opacity: 0.5;
+  }
+
+  .cta-btn {
+    margin-top: 24px;
+    padding: 14px 32px;
+    background: #0066FF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* Progress bar */
+  #progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #0066FF;
+    width: 0%;
+    transition: width 0.1s linear;
+    z-index: 100;
+  }
+
+  /* Controls */
+  #controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+  }
+
+  #controls button {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    backdrop-filter: blur(10px);
+  }
+
+  #controls button:hover { background: rgba(255,255,255,0.25); }
+
+  #timestamp {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Inter', monospace;
+  }
+
+  /* Montage grid */
+  .montage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: min(600px, 85vw);
+  }
+
+  .montage-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.4s ease;
+  }
+
+  .montage-card.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .montage-card .icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .montage-card .label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  /* Tagline scene */
+  .tagline {
+    font-size: clamp(22px, 3vw, 40px);
+    font-weight: 700;
+    text-align: center;
+    padding: 0 40px;
+    max-width: 700px;
+    line-height: 1.3;
+  }
+</style>
+</head>
+<body>
+
+<div id="video-container">
+
+  <!-- Scene 1: Problem stat (0:00-0:03) -->
+  <div class="scene scene-dark" id="scene-1">
+    <div class="hero-text" id="stat-line">58% of transactions are still coded by hand.</div>
+  </div>
+
+  <!-- Scene 2: Pain lines (0:03-0:06) -->
+  <div class="scene scene-dark" id="scene-2">
+    <div class="line-stack">
+      <div class="line" id="pain-1">Receipts get lost.</div>
+      <div class="line" id="pain-2">Fields sit empty.</div>
+      <div class="line" id="pain-3">Admins chase.</div>
+    </div>
+  </div>
+
+  <!-- Scene 3: "Not anymore" (0:06-0:08) -->
+  <div class="scene scene-blue" id="scene-3">
+    <div class="hero-text">Not anymore.</div>
+  </div>
+
+  <!-- Scene 4: Transaction filling in (0:08-0:12) -->
+  <div class="scene scene-gradient" id="scene-4">
+    <div class="transaction-drawer" id="drawer">
+      <div class="drawer-header">
+        <div class="merchant-logo">S</div>
+        <div class="merchant-info">
+          <h3>Staples Office Supply</h3>
+          <span>Mar 11, 2026</span>
+        </div>
+        <div class="drawer-amount">$127.43</div>
+      </div>
+      <div class="drawer-field">
+        <div class="field-label">Receipt</div>
+        <div class="field-empty" id="receipt-empty"></div>
+        <div class="field-value" id="receipt-val">receipt_staples_031126.pdf</div>
+        <span class="ai-badge" id="badge-receipt">AI</span>
+      </div>
+      <div class="drawer-field">
+        <div class="field-label">Category</div>
+        <div class="field-empty" id="cat-empty"></div>
+        <div class="field-value" id="cat-val">Office Supplies</div>
+        <span class="ai-badge" id="badge-cat">AI</span>
+      </div>
+      <div class="drawer-field">
+        <div class="field-label">Department</div>
+        <div class="field-empty" id="dept-empty"></div>
+        <div class="field-value" id="dept-val">Operations</div>
+        <span class="ai-badge" id="badge-dept">AI</span>
+      </div>
+      <div class="drawer-field">
+        <div class="field-label">Notes</div>
+        <div class="field-empty" id="notes-empty"></div>
+        <div class="field-value" id="notes-val">Printer paper, toner, binder clips</div>
+        <span class="ai-badge" id="badge-notes">AI</span>
+      </div>
+      <div class="receipt-attach" id="receipt-box">No receipt attached</div>
+    </div>
+  </div>
+
+  <!-- Scene 5: Pillar 1 - Receipts (0:12-0:15) -->
+  <div class="scene scene-dark" id="scene-5">
+    <div class="pillar-text">Receipts capture themselves.</div>
+  </div>
+
+  <!-- Scene 6: Pillar 2 - Transactions (0:15-0:19) -->
+  <div class="scene scene-dark" id="scene-6">
+    <div class="pillar-text">Transactions code themselves.</div>
+  </div>
+
+  <!-- Scene 7: Pillar 3 - Control / Settings (0:19-0:22) -->
+  <div class="scene scene-gradient" id="scene-7">
+    <div class="pillar-text" style="margin-bottom: 24px; color: #fff;">You stay in control.</div>
+    <div class="settings-panel" id="settings">
+      <div class="settings-title">Transaction Agent Settings</div>
+      <div class="setting-row">
+        <div class="setting-name">Category</div>
+        <div class="toggle" id="tog-cat"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-name">Department</div>
+        <div class="toggle" id="tog-dept"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-name">Location</div>
+        <div class="toggle" id="tog-loc"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-name">Notes</div>
+        <div class="toggle" id="tog-notes"></div>
+      </div>
+      <div class="setting-row" style="border: none;">
+        <div class="setting-name">Auto-generate receipts</div>
+        <div class="toggle" id="tog-gen"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 8: Montage (0:22-0:26) -->
+  <div class="scene scene-dark" id="scene-8">
+    <div class="montage-grid">
+      <div class="montage-card" id="mc-1">
+        <div class="icon">📱</div>
+        <div class="label">Text a receipt</div>
+      </div>
+      <div class="montage-card" id="mc-2">
+        <div class="icon">📧</div>
+        <div class="label">Gmail captures it</div>
+      </div>
+      <div class="montage-card" id="mc-3">
+        <div class="icon">✅</div>
+        <div class="label">40 of 50 done</div>
+      </div>
+      <div class="montage-card" id="mc-4">
+        <div class="icon">🔄</div>
+        <div class="label">Synced to ERP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 9: Data stat (0:26-0:30) -->
+  <div class="scene scene-dark" id="scene-9">
+    <div class="stat-text">[X]%</div>
+    <div class="stat-label">of transactions. Zero manual entry.</div>
+  </div>
+
+  <!-- Scene 10: Dial concept (0:30-0:35) -->
+  <div class="scene scene-gradient" id="scene-10">
+    <div class="sub-text" style="margin-bottom: 32px; color: #fff;">The more you activate, the more touchless you become.</div>
+    <div class="dial-container">
+      <svg class="dial-svg" viewBox="0 0 200 200">
+        <circle class="dial-track" cx="100" cy="100" r="90"/>
+        <circle class="dial-fill" id="dial-arc" cx="100" cy="100" r="90"/>
+      </svg>
+      <div class="dial-label">
+        <div class="dial-percent" id="dial-pct">0%</div>
+        <div class="dial-word">touchless</div>
+      </div>
+    </div>
+    <div class="integrations" id="int-pills">
+      <div class="int-pill" id="pill-gmail">Gmail</div>
+      <div class="int-pill" id="pill-cat">Categories</div>
+      <div class="int-pill" id="pill-notes">Notes</div>
+      <div class="int-pill" id="pill-gen">Auto-gen receipts</div>
+      <div class="int-pill" id="pill-lyft">Lyft</div>
+    </div>
+  </div>
+
+  <!-- Scene 11: Tagline (0:35-0:40) -->
+  <div class="scene scene-blue" id="scene-11">
+    <div class="tagline">From swipe to sync.<br>No spreadsheet required.</div>
+  </div>
+
+  <!-- Scene 12: End card (0:40-0:48) -->
+  <div class="scene scene-white" id="scene-12">
+    <div class="bill-logo">BILL</div>
+    <div class="agent-name" style="color: #111;">Transaction Agent</div>
+    <div class="included-text" style="color: #666;">Included with BILL Spend & Expense.</div>
+    <button class="cta-btn" onclick="location.reload()">Replay</button>
+  </div>
+
+</div>
+
+<div id="progress-bar"></div>
+
+<div id="timestamp">0:00 / 0:48</div>
+
+<div id="controls">
+  <button onclick="restart()">Restart</button>
+  <button onclick="togglePause()" id="pause-btn">Pause</button>
+</div>
+
+<script>
+const TOTAL_DURATION = 48000; // 48 seconds in ms
+let startTime = null;
+let elapsed = 0;
+let paused = false;
+let pauseTime = 0;
+let animationFrame = null;
+let triggeredActions = new Set();
+
+function action(id, fn) {
+  if (!triggeredActions.has(id)) {
+    triggeredActions.add(id);
+    fn();
+  }
+}
+
+function showScene(n) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  const scene = document.getElementById('scene-' + n);
+  if (scene) scene.classList.add('active');
+}
+
+function tick(timestamp) {
+  if (paused) return;
+  if (!startTime) startTime = timestamp;
+  elapsed = timestamp - startTime;
+
+  const progress = Math.min(elapsed / TOTAL_DURATION, 1);
+  document.getElementById('progress-bar').style.width = (progress * 100) + '%';
+
+  const secs = Math.floor(elapsed / 1000);
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  document.getElementById('timestamp').textContent =
+    `${m}:${s.toString().padStart(2,'0')} / 0:48`;
+
+  // Scene 1: 0-3s
+  if (elapsed < 3000) {
+    action('s1', () => showScene(1));
+  }
+  // Scene 2: 3-6s
+  else if (elapsed < 6000) {
+    action('s2', () => showScene(2));
+    if (elapsed > 3200) action('p1', () => document.getElementById('pain-1').classList.add('visible'));
+    if (elapsed > 3800) action('p1x', () => { document.getElementById('pain-1').classList.add('exit'); });
+    if (elapsed > 4000) action('p2', () => document.getElementById('pain-2').classList.add('visible'));
+    if (elapsed > 4600) action('p2x', () => { document.getElementById('pain-2').classList.add('exit'); });
+    if (elapsed > 4800) action('p3', () => document.getElementById('pain-3').classList.add('visible'));
+  }
+  // Scene 3: 6-8s
+  else if (elapsed < 8000) {
+    action('s3', () => showScene(3));
+  }
+  // Scene 4: 8-12s - transaction filling in
+  else if (elapsed < 12000) {
+    action('s4', () => showScene(4));
+
+    if (elapsed > 8800) action('fill-receipt', () => {
+      document.getElementById('receipt-empty').classList.add('gone');
+      document.getElementById('receipt-val').classList.add('filled');
+      document.getElementById('badge-receipt').classList.add('show');
+      document.getElementById('receipt-box').classList.add('attached');
+      document.getElementById('receipt-box').textContent = '📎 receipt_staples_031126.pdf';
+    });
+    if (elapsed > 9400) action('fill-cat', () => {
+      document.getElementById('cat-empty').classList.add('gone');
+      document.getElementById('cat-val').classList.add('filled');
+      document.getElementById('badge-cat').classList.add('show');
+    });
+    if (elapsed > 10000) action('fill-dept', () => {
+      document.getElementById('dept-empty').classList.add('gone');
+      document.getElementById('dept-val').classList.add('filled');
+      document.getElementById('badge-dept').classList.add('show');
+    });
+    if (elapsed > 10600) action('fill-notes', () => {
+      document.getElementById('notes-empty').classList.add('gone');
+      document.getElementById('notes-val').classList.add('filled');
+      document.getElementById('badge-notes').classList.add('show');
+    });
+  }
+  // Scene 5: 12-15s
+  else if (elapsed < 15000) {
+    action('s5', () => showScene(5));
+  }
+  // Scene 6: 15-19s
+  else if (elapsed < 19000) {
+    action('s6', () => showScene(6));
+  }
+  // Scene 7: 19-22s - settings toggles
+  else if (elapsed < 22000) {
+    action('s7', () => showScene(7));
+    if (elapsed > 19500) action('tog1', () => document.getElementById('tog-cat').classList.add('on'));
+    if (elapsed > 19900) action('tog2', () => document.getElementById('tog-dept').classList.add('on'));
+    if (elapsed > 20300) action('tog3', () => document.getElementById('tog-loc').classList.add('on'));
+    if (elapsed > 20700) action('tog4', () => document.getElementById('tog-notes').classList.add('on'));
+    if (elapsed > 21100) action('tog5', () => document.getElementById('tog-gen').classList.add('on'));
+  }
+  // Scene 8: 22-26s - montage
+  else if (elapsed < 26000) {
+    action('s8', () => showScene(8));
+    if (elapsed > 22300) action('mc1', () => document.getElementById('mc-1').classList.add('show'));
+    if (elapsed > 23000) action('mc2', () => document.getElementById('mc-2').classList.add('show'));
+    if (elapsed > 23700) action('mc3', () => document.getElementById('mc-3').classList.add('show'));
+    if (elapsed > 24400) action('mc4', () => document.getElementById('mc-4').classList.add('show'));
+  }
+  // Scene 9: 26-30s
+  else if (elapsed < 30000) {
+    action('s9', () => showScene(9));
+  }
+  // Scene 10: 30-35s - dial
+  else if (elapsed < 35000) {
+    action('s10', () => {
+      showScene(10);
+      setTimeout(() => document.getElementById('dial-arc').classList.add('animate'), 200);
+      // Animate percentage
+      let pctEl = document.getElementById('dial-pct');
+      let pctStart = Date.now();
+      let pctInterval = setInterval(() => {
+        let p = Math.min((Date.now() - pctStart) / 3000, 1);
+        pctEl.textContent = Math.round(p * 75) + '%';
+        if (p >= 1) clearInterval(pctInterval);
+      }, 50);
+    });
+    if (elapsed > 30500) action('pill1', () => document.getElementById('pill-gmail').classList.add('on'));
+    if (elapsed > 31200) action('pill2', () => document.getElementById('pill-cat').classList.add('on'));
+    if (elapsed > 31900) action('pill3', () => document.getElementById('pill-notes').classList.add('on'));
+    if (elapsed > 32600) action('pill4', () => document.getElementById('pill-gen').classList.add('on'));
+    if (elapsed > 33300) action('pill5', () => document.getElementById('pill-lyft').classList.add('on'));
+  }
+  // Scene 11: 35-40s
+  else if (elapsed < 40000) {
+    action('s11', () => showScene(11));
+  }
+  // Scene 12: 40-48s - end card
+  else if (elapsed < 48000) {
+    action('s12', () => showScene(12));
+  }
+
+  if (elapsed < TOTAL_DURATION) {
+    animationFrame = requestAnimationFrame(tick);
+  }
+}
+
+function restart() {
+  cancelAnimationFrame(animationFrame);
+  startTime = null;
+  elapsed = 0;
+  paused = false;
+  triggeredActions.clear();
+  document.getElementById('pause-btn').textContent = 'Pause';
+
+  // Reset all animated elements
+  document.querySelectorAll('.line').forEach(l => { l.classList.remove('visible','exit'); });
+  document.querySelectorAll('.field-empty').forEach(f => f.classList.remove('gone'));
+  document.querySelectorAll('.field-value').forEach(f => f.classList.remove('filled'));
+  document.querySelectorAll('.ai-badge').forEach(b => b.classList.remove('show'));
+  document.getElementById('receipt-box').classList.remove('attached');
+  document.getElementById('receipt-box').textContent = 'No receipt attached';
+  document.querySelectorAll('.toggle').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.montage-card').forEach(c => c.classList.remove('show'));
+  document.getElementById('dial-arc').classList.remove('animate');
+  document.getElementById('dial-pct').textContent = '0%';
+  document.querySelectorAll('.int-pill').forEach(p => p.classList.remove('on'));
+  document.getElementById('progress-bar').style.width = '0%';
+
+  animationFrame = requestAnimationFrame(tick);
+}
+
+function togglePause() {
+  if (paused) {
+    paused = false;
+    document.getElementById('pause-btn').textContent = 'Pause';
+    startTime = performance.now() - elapsed;
+    animationFrame = requestAnimationFrame(tick);
+  } else {
+    paused = true;
+    document.getElementById('pause-btn').textContent = 'Play';
+    cancelAnimationFrame(animationFrame);
+  }
+}
+
+// Start
+animationFrame = requestAnimationFrame(tick);
+</script>
+
+</body>
+</html>
