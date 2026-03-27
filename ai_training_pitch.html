@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Product Marketing at BILL</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #111827;
+    --ink-light: #4b5563;
+    --ink-muted: #9ca3af;
+    --blue: #0066FF;
+    --blue-soft: #EBF2FF;
+    --blue-dark: #0044CC;
+    --green: #059669;
+    --green-soft: #ECFDF5;
+    --orange: #f97316;
+    --orange-soft: #FFF7ED;
+    --purple: #7c3aed;
+    --purple-soft: #F5F3FF;
+    --surface: #ffffff;
+    --bg: #f9fafb;
+    --border: #e5e7eb;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: linear-gradient(135deg, #0a0f1a 0%, #111d3a 50%, #0a1628 100%);
+    color: #fff;
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    letter-spacing: -1px;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, #60a5fa, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ---- NAV DOTS ---- */
+  .nav-strip {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+
+  /* ---- SECTIONS ---- */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+
+  section + section {
+    border-top: 1px solid var(--border);
+  }
+
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 17px;
+    color: var(--ink-light);
+    max-width: 640px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+
+  /* ---- THE PROBLEM ---- */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: box-shadow 0.2s;
+  }
+
+  .problem-card:hover { box-shadow: var(--shadow-md); }
+
+  .problem-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .problem-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .problem-card p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* ---- INPUTS SECTION ---- */
+  .inputs-flow {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 80px 1fr;
+    align-items: center;
+    gap: 0;
+  }
+
+  .input-column {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    min-height: 420px;
+  }
+
+  .input-column h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .input-column h3 .col-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-muted);
+    font-size: 28px;
+  }
+
+  .input-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .input-item:last-child { border-bottom: none; }
+
+  .input-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .input-item-text h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .input-item-text p {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* ---- OUTPUT SHOWCASE ---- */
+  .output-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .output-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .output-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .output-card .card-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .tag-launch { background: var(--blue-soft); color: var(--blue); }
+  .tag-content { background: var(--green-soft); color: var(--green); }
+  .tag-research { background: var(--purple-soft); color: var(--purple); }
+  .tag-creative { background: var(--orange-soft); color: var(--orange); }
+
+  .output-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .output-card p {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .output-card .time-saved {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green);
+    background: var(--green-soft);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* ---- CASE STUDY ---- */
+  .case-study {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .case-header {
+    background: linear-gradient(135deg, #0a0f1a, #111d3a);
+    color: #fff;
+    padding: 40px 40px 32px;
+  }
+
+  .case-header .case-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .case-header h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .case-header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .case-body {
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .case-column h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+
+  .case-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .case-check {
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .case-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 28px 40px;
+    border-top: 1px solid var(--border);
+    background: #fafbfc;
+  }
+
+  .case-stat {
+    text-align: center;
+  }
+
+  .case-stat .num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--blue);
+    letter-spacing: -1px;
+  }
+
+  .case-stat .label {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+
+  /* ---- ROLLOUT TIMELINE ---- */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 32px;
+  }
+
+  .timeline-item:last-child { margin-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -26px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+
+  .timeline-week {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+
+  .timeline-item h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .timeline-item p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .timeline-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timeline-chip {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f3f4f6;
+    color: var(--ink-light);
+  }
+
+  /* ---- BOTTOM CTA ---- */
+  .cta-section {
+    background: linear-gradient(135deg, #0a0f1a, #111d3a);
+    color: #fff;
+    text-align: center;
+    padding: 80px 40px;
+    border-radius: 0;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: var(--blue);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .cta-button:hover { background: var(--blue-dark); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .problem-grid, .output-grid { grid-template-columns: 1fr; }
+
+    .inputs-flow {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .flow-arrow {
+      transform: rotate(90deg);
+      padding: 8px 0;
+    }
+
+    .case-body { grid-template-columns: 1fr; }
+    .case-stat-row { grid-template-columns: 1fr; gap: 16px; }
+
+    .hero { padding: 60px 24px 50px; }
+    .container { padding: 0 24px; }
+    section { padding: 60px 0; }
+  }
+
+  /* ---- BIGGER PICTURE ---- */
+  .vision-banner {
+    background: linear-gradient(135deg, #0066FF 0%, #4F46E5 100%);
+    border-radius: var(--radius);
+    padding: 48px 48px 40px;
+    color: #fff;
+    margin-bottom: 32px;
+  }
+
+  .vision-banner h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .vision-banner p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.85;
+    max-width: 700px;
+  }
+
+  .vision-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .vision-step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+  }
+
+  .vision-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-soft);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+
+  .vision-step h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .vision-step p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .vision-step .step-arrow {
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-muted);
+    font-size: 20px;
+    z-index: 2;
+  }
+
+  /* ---- OPEN QUESTIONS ---- */
+  .questions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    transition: box-shadow 0.2s;
+  }
+
+  .question-card:hover { box-shadow: var(--shadow-md); }
+
+  .question-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .ql-access { background: #FEF3C7; color: #92400E; }
+  .ql-tooling { background: var(--purple-soft); color: var(--purple); }
+  .ql-process { background: var(--blue-soft); color: var(--blue); }
+  .ql-adoption { background: var(--green-soft); color: var(--green); }
+
+  .question-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .question-card p {
+    font-size: 13.5px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .vision-steps, .questions-grid { grid-template-columns: 1fr; }
+    .vision-step .step-arrow { display: none; }
+  }
+
+  /* ---- SCROLL ANIMATIONS ---- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-eyebrow">Internal Proposal</div>
+  <h1>AI-Powered <span>Product Marketing</span> at BILL</h1>
+  <p class="hero-sub">A plan to standardize how our PMM team uses AI, so every launch runs faster, every asset sounds like BILL, and every PMM levels up.</p>
+</div>
+
+<!-- ============ NAV ============ -->
+<div class="nav-strip">
+  <div class="nav-inner">
+    <a href="#problem" class="nav-link">The Opportunity</a>
+    <a href="#inputs" class="nav-link">System Inputs</a>
+    <a href="#outputs" class="nav-link">What We Build</a>
+    <a href="#proof" class="nav-link">Proof of Concept</a>
+    <a href="#rollout" class="nav-link">Rollout Plan</a>
+    <a href="#bigger" class="nav-link">The Bigger Picture</a>
+    <a href="#questions" class="nav-link">Open Questions</a>
+  </div>
+</div>
+
+<!-- ============ THE OPPORTUNITY ============ -->
+<section id="problem">
+  <div class="container">
+    <div class="section-eyebrow">The Opportunity</div>
+    <h2 class="section-title">Most PMMs use AI like a search engine.<br>We can turn it into a system.</h2>
+    <p class="section-desc">Right now, every PMM prompts from scratch, gets inconsistent output, and spends time reformatting to match BILL's voice. A shared system fixes that for all 20 of us at once.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card fade-in">
+        <div class="problem-icon" style="background: var(--orange-soft);">
+          <span>1</span>
+        </div>
+        <h3>Inconsistent starting points</h3>
+        <p>Everyone has their own templates and prompts. When someone new joins or picks up a launch mid-stream, they're starting from zero. AI output quality depends entirely on who's prompting.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon" style="background: var(--blue-soft);">
+          <span>2</span>
+        </div>
+        <h3>Brand voice is hard to scale</h3>
+        <p>Our tone and voice guide exists, but every PMM interprets it slightly differently when writing or prompting. AI makes this worse unless we give it the same guardrails we follow ourselves.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon" style="background: var(--purple-soft);">
+          <span>3</span>
+        </div>
+        <h3>Competitive intel goes stale</h3>
+        <p>Market positioning changes fast. Manually tracking competitors across product pages, press releases, and review sites takes hours that most PMMs don't have in a launch cycle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM INPUTS ============ -->
+<section id="inputs">
+  <div class="container">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">We teach AI how BILL works, once. Then everyone benefits.</h2>
+    <p class="section-desc">The system is only as good as what you feed it. By standardizing our inputs, we get consistent, on-brand output across the entire team without anyone needing to become a prompt engineer.</p>
+
+    <div class="inputs-flow">
+      <!-- Column 1: Inputs -->
+      <div class="input-column fade-in">
+        <h3><span class="col-num">1</span> Shared Inputs</h3>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue);"></div>
+          <div class="input-item-text">
+            <h4>BILL Tone & Voice Guide</h4>
+            <p>Brand personality, do's and don'ts, audience-specific language guidelines</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue);"></div>
+          <div class="input-item-text">
+            <h4>PMM Instructions File</h4>
+            <p>Behavioral rules for AI: no em dashes, no AI cliches, how to format output, what to avoid</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue);"></div>
+          <div class="input-item-text">
+            <h4>Standardized Templates</h4>
+            <p>Fact sheet, messaging framework, copy doc, and one-sheet templates that every launch follows</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue);"></div>
+          <div class="input-item-text">
+            <h4>GTM Deliverables Matrix</h4>
+            <p>Tier 1/2/3 definitions and required deliverables so AI knows what a launch needs</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue);"></div>
+          <div class="input-item-text">
+            <h4>Competitor & Analyst Sources</h4>
+            <p>Approved list of competitors, analyst firms, and industry publications for research</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="flow-arrow fade-in">&rarr;</div>
+
+      <!-- Column 2: AI Layer -->
+      <div class="input-column fade-in" style="border-color: var(--blue); background: var(--blue-soft);">
+        <h3><span class="col-num">2</span> AI Processing</h3>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue-dark);"></div>
+          <div class="input-item-text">
+            <h4>Reads the PRD or brief</h4>
+            <p>Understands the feature, audience, and business context from product documentation</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue-dark);"></div>
+          <div class="input-item-text">
+            <h4>Applies BILL voice rules</h4>
+            <p>Every piece of output follows the same brand guardrails automatically</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue-dark);"></div>
+          <div class="input-item-text">
+            <h4>Fills standard templates</h4>
+            <p>Produces structured deliverables in the exact format the team expects</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue-dark);"></div>
+          <div class="input-item-text">
+            <h4>Researches competitors</h4>
+            <p>Pulls live data from competitor sites, analyst reports, and review platforms</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--blue-dark);"></div>
+          <div class="input-item-text">
+            <h4>Iterates with the PMM</h4>
+            <p>Back-and-forth refinement until the output matches the PMM's vision</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="flow-arrow fade-in">&rarr;</div>
+
+      <!-- Column 3: Outputs -->
+      <div class="input-column fade-in">
+        <h3><span class="col-num">3</span> Consistent Outputs</h3>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--green);"></div>
+          <div class="input-item-text">
+            <h4>Launch-ready deliverables</h4>
+            <p>Fact sheets, messaging frameworks, copy docs that sound like BILL from the first draft</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--green);"></div>
+          <div class="input-item-text">
+            <h4>Full copy packages</h4>
+            <p>Emails, social posts, Pendo guides, newsletter blurbs, one-sheets all from a single brief</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--green);"></div>
+          <div class="input-item-text">
+            <h4>Website audit recommendations</h4>
+            <p>Page-by-page copy updates tied to new launches, with before/after suggestions</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--green);"></div>
+          <div class="input-item-text">
+            <h4>Competitive intelligence</h4>
+            <p>Up-to-date positioning analysis, battlecard inputs, and differentiation summaries</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="input-dot" style="background: var(--green);"></div>
+          <div class="input-item-text">
+            <h4>Creative prototypes</h4>
+            <p>Interactive sizzle video concepts, landing page mockups, visual pitch materials</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT WE BUILD ============ -->
+<section id="outputs">
+  <div class="container">
+    <div class="section-eyebrow">What We Build</div>
+    <h2 class="section-title">Every PMM gets a standardized AI toolkit.</h2>
+    <p class="section-desc">These are the reusable workflows the team would share. Each one takes a standard input (like a PRD or brief) and produces a polished output in BILL's voice.</p>
+
+    <div class="output-grid">
+      <div class="output-card fade-in">
+        <span class="card-tag tag-launch">Launch</span>
+        <h3>Launch Package Generator</h3>
+        <p>Feed in a PRD. Get a first draft of the fact sheet, messaging framework, and full copy doc with all asset types.</p>
+        <span class="time-saved">Saves ~8 hours per launch</span>
+      </div>
+      <div class="output-card fade-in">
+        <span class="card-tag tag-content">Content</span>
+        <h3>Multi-Channel Copy Builder</h3>
+        <p>From a single messaging framework, generate email, social, Pendo, newsletter, and community post drafts in one pass.</p>
+        <span class="time-saved">Saves ~4 hours per launch</span>
+      </div>
+      <div class="output-card fade-in">
+        <span class="card-tag tag-research">Research</span>
+        <h3>Competitive Monitor</h3>
+        <p>Automated review of competitor product pages, press releases, and positioning. Surface changes that matter to your product area.</p>
+        <span class="time-saved">Saves ~3 hours per cycle</span>
+      </div>
+      <div class="output-card fade-in">
+        <span class="card-tag tag-content">Content</span>
+        <h3>Website Copy Auditor</h3>
+        <p>Scan bill.com pages against new messaging and get page-by-page recommendations with suggested rewrites.</p>
+        <span class="time-saved">Saves ~5 hours per audit</span>
+      </div>
+      <div class="output-card fade-in">
+        <span class="card-tag tag-creative">Creative</span>
+        <h3>Asset Prototyper</h3>
+        <p>Build interactive prototypes for sizzle videos, landing pages, and pitch decks to share with creative teams before production.</p>
+        <span class="time-saved">Saves ~6 hours per concept</span>
+      </div>
+      <div class="output-card fade-in">
+        <span class="card-tag tag-research">Research</span>
+        <h3>Market Trend Synthesizer</h3>
+        <p>Digest analyst reports, industry news, and earnings calls. Surface trends relevant to your product area on a regular cadence.</p>
+        <span class="time-saved">Saves ~3 hours per report</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROOF OF CONCEPT ============ -->
+<section id="proof">
+  <div class="container">
+    <div class="section-eyebrow">Proof of Concept</div>
+    <h2 class="section-title">This already works. Here's the Transaction Agent launch.</h2>
+    <p class="section-desc">This system was used end-to-end on the Transaction Agent launch (Tier 1, GA April 27, 2026). Every deliverable below was produced using the inputs described above.</p>
+
+    <div class="case-study fade-in">
+      <div class="case-header">
+        <div class="case-tag">Live Example</div>
+        <h3>Transaction Agent Launch</h3>
+        <p>Tier 1 launch for BILL Spend & Expense, combining receipt ingestion and AI categorization into a unified agent experience.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-column">
+          <h4>Deliverables Produced</h4>
+          <div class="case-item"><span class="case-check">&#10003;</span> Fact Sheet</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Messaging Framework</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Full Copy Doc (11 assets)</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Website Audit (23 updates)</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Sizzle Video Script</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Interactive Video Prototype</div>
+        </div>
+        <div class="case-column">
+          <h4>What Went In</h4>
+          <div class="case-item"><span class="case-check">&#10003;</span> PRD from Product</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Data plan / messaging notes</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> BILL Tone & Voice Guide</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Standard templates</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> Competitor research (live)</div>
+          <div class="case-item"><span class="case-check">&#10003;</span> PMM direction & iteration</div>
+        </div>
+      </div>
+      <div class="case-stat-row">
+        <div class="case-stat">
+          <div class="num">6</div>
+          <div class="label">Major deliverables</div>
+        </div>
+        <div class="case-stat">
+          <div class="num">11</div>
+          <div class="label">Copy assets in one pass</div>
+        </div>
+        <div class="case-stat">
+          <div class="num">23</div>
+          <div class="label">Website updates identified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROLLOUT PLAN ============ -->
+<section id="rollout">
+  <div class="container">
+    <div class="section-eyebrow">Rollout Plan</div>
+    <h2 class="section-title">Six weeks to get the full team running.</h2>
+    <p class="section-desc">The rollout is designed so PMMs start producing real work in their first session. No theory-only workshops. Every session ends with a usable output.</p>
+
+    <div class="timeline">
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 1</div>
+        <h3>Kickoff: See What's Possible</h3>
+        <p>Live walkthrough of the Transaction Agent launch from PRD to finished deliverables. Show the before and after. This is the credibility moment that gets buy-in from the room.</p>
+        <div class="timeline-details">
+          <span class="timeline-chip">Live demo</span>
+          <span class="timeline-chip">Full team (20 PMMs)</span>
+          <span class="timeline-chip">90 minutes</span>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 2</div>
+        <h3>Foundation: Same Playbook, Same Tools</h3>
+        <p>Hands-on session where every PMM sets up their AI environment with the shared inputs: tone guide, templates, instructions file, and GTM deliverables matrix. Everyone leaves with AI configured to sound like BILL.</p>
+        <div class="timeline-details">
+          <span class="timeline-chip">Hands-on workshop</span>
+          <span class="timeline-chip">Setup & configuration</span>
+          <span class="timeline-chip">2 hours</span>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Weeks 3-4</div>
+        <h3>Build: Real Workflows on Real Projects</h3>
+        <p>PMMs pair up by experience level and build a reusable workflow for their product area. Each pair takes a current launch or project and runs it through the system. Office hours format with hands-on support.</p>
+        <div class="timeline-details">
+          <span class="timeline-chip">Paired sessions</span>
+          <span class="timeline-chip">Office hours</span>
+          <span class="timeline-chip">Real deliverables</span>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Weeks 5-6</div>
+        <h3>Intelligence: Competitive & Market Monitoring</h3>
+        <p>Set up automated competitive tracking and market trend workflows for each product area. Each PMM presents one insight AI surfaced that they wouldn't have found on their own.</p>
+        <div class="timeline-details">
+          <span class="timeline-chip">Competitive setup</span>
+          <span class="timeline-chip">Insight presentations</span>
+          <span class="timeline-chip">Shared library launch</span>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Ongoing</div>
+        <h3>Community of Practice</h3>
+        <p>Shared Slack channel for prompts, workflows, and wins. Monthly show-and-tell where someone demos a workflow they've built. Shared library of templates and skills that anyone on the team can use and improve.</p>
+        <div class="timeline-details">
+          <span class="timeline-chip">Slack channel</span>
+          <span class="timeline-chip">Monthly demos</span>
+          <span class="timeline-chip">Shared template library</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BIGGER PICTURE ============ -->
+<section id="bigger">
+  <div class="container">
+    <div class="section-eyebrow">The Bigger Picture</div>
+    <h2 class="section-title">PMM is the proving ground. Marketing is the opportunity.</h2>
+    <p class="section-desc">If we prove this works within our team of 20, the playbook scales to every marketing function at BILL. Content, demand gen, brand, customer marketing, enablement. The inputs change, but the system is the same.</p>
+
+    <div class="vision-banner fade-in">
+      <h3>We have a chance to lead this for all of marketing.</h3>
+      <p>Most marketing teams are experimenting with AI in isolation. What we're proposing is different: a shared infrastructure that makes every person's output better, more consistent, and faster. If PMM proves the model, we become the blueprint for how the rest of marketing adopts AI at BILL. That's not just efficiency for our team. That's organizational impact.</p>
+    </div>
+
+    <div class="vision-steps">
+      <div class="vision-step fade-in">
+        <div class="vision-step-num">1</div>
+        <h3>Prove it in PMM</h3>
+        <p>20 PMMs running on standardized AI workflows. Measurable time savings. Consistent, on-brand output. A real case study with real results.</p>
+        <span class="step-arrow">&rarr;</span>
+      </div>
+      <div class="vision-step fade-in">
+        <div class="vision-step-num">2</div>
+        <h3>Expand to marketing</h3>
+        <p>Share the playbook with content, demand gen, customer marketing, and brand. Same system, adapted for their inputs and deliverables.</p>
+        <span class="step-arrow">&rarr;</span>
+      </div>
+      <div class="vision-step fade-in">
+        <div class="vision-step-num">3</div>
+        <h3>Scale the impact</h3>
+        <p>A marketing organization where every team has AI-powered workflows, shared brand guardrails, and a culture of building on each other's work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN QUESTIONS ============ -->
+<section id="questions">
+  <div class="container">
+    <div class="section-eyebrow">Open Questions</div>
+    <h2 class="section-title">Things we need to figure out together.</h2>
+    <p class="section-desc">This proposal is a starting point for the conversation, not a finished plan. These are the questions we need to answer before moving forward.</p>
+
+    <div class="questions-grid">
+      <div class="question-card fade-in">
+        <span class="question-label ql-access">Access</span>
+        <h3>How does IT feel about this? How do we get access to Claude?</h3>
+        <p>Claude is the tool that powers these workflows. We need to understand IT's stance on approving it for the team, what security reviews are needed, and what the procurement process looks like.</p>
+      </div>
+      <div class="question-card fade-in">
+        <span class="question-label ql-tooling">Tooling</span>
+        <h3>Gemini is not Claude. They don't do the same things.</h3>
+        <p>The workflows demonstrated here are built on Claude's specific capabilities, including coding, file access, web research, and iterative conversation. Gemini serves a different purpose and doesn't replicate what's shown in this proposal.</p>
+      </div>
+      <div class="question-card fade-in">
+        <span class="question-label ql-access">Access</span>
+        <h3>There's a rumor that access may be opening back up.</h3>
+        <p>If BILL is reconsidering broader AI tool access, this proposal could serve as a strong use case for why and how to do it well. A trained team with standardized guardrails is a better bet than individual experimentation.</p>
+      </div>
+      <div class="question-card fade-in">
+        <span class="question-label ql-process">Process</span>
+        <h3>Do we want a more formal training program?</h3>
+        <p>The six-week rollout is one approach. We could go lighter with self-serve resources and office hours, or more structured with a certification-style program. What level of investment makes sense for the team right now?</p>
+      </div>
+      <div class="question-card fade-in">
+        <span class="question-label ql-tooling">Tooling</span>
+        <h3>How do we keep source documents live so AI stays current?</h3>
+        <p>Templates, tone guides, and competitive data will evolve. We need a system where updates to these documents are automatically reflected in everyone's AI environment, so the team doesn't drift over time.</p>
+      </div>
+      <div class="question-card fade-in">
+        <span class="question-label ql-adoption">Adoption</span>
+        <h3>How do we bring everyone along with us?</h3>
+        <p>20 PMMs with different comfort levels, different product areas, and different workflows. Some will be excited, some will be skeptical. We need a plan that meets people where they are and builds confidence through early wins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<div class="cta-section">
+  <h2>Let's build the most AI-ready PMM team in fintech.</h2>
+  <p>The system works. The proof exists. The only question is how fast we want to scale it across the team.</p>
+  <a href="#" class="cta-button">Let's talk about next steps &rarr;</a>
+</div>
+
+<!-- ============ SCROLL ANIMATION ============ -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Nav active state
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active',
+          link.getAttribute('href') === '#' + entry.target.id
+        );
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>
