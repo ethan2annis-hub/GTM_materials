@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BILL S&E — FY26 Q4 Launch Calendar</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #111827;
+    --ink-light: #4b5563;
+    --ink-muted: #9ca3af;
+    --surface: #ffffff;
+    --bg: #f8f9fb;
+    --border: #e5e7eb;
+    --border-light: #f0f1f3;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+
+    /* Workstream colors */
+    --ws-transaction: #0066FF;
+    --ws-transaction-bg: #EBF2FF;
+    --ws-transaction-border: #B3D1FF;
+    --ws-travel: #059669;
+    --ws-travel-bg: #ECFDF5;
+    --ws-travel-border: #A7F3D0;
+    --ws-tentpole: #f97316;
+    --ws-tentpole-bg: #FFF7ED;
+    --ws-tentpole-border: #FED7AA;
+    --ws-lyft: #7c3aed;
+    --ws-lyft-bg: #F5F3FF;
+    --ws-lyft-border: #DDD6FE;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- HEADER ---- */
+  .header {
+    background: linear-gradient(135deg, #0a0f1a 0%, #111d3a 50%, #0a1628 100%);
+    color: #fff;
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 5px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 600px;
+  }
+
+  /* ---- CONTROLS ---- */
+  .controls {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .controls-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .filter-btn:hover {
+    border-color: #ccc;
+    box-shadow: var(--shadow);
+  }
+
+  .filter-btn.active {
+    color: #fff;
+    border-color: transparent;
+  }
+
+  .filter-btn .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .filter-btn[data-ws="transaction"] .dot { background: var(--ws-transaction); }
+  .filter-btn[data-ws="travel"] .dot { background: var(--ws-travel); }
+  .filter-btn[data-ws="tentpole"] .dot { background: var(--ws-tentpole); }
+  .filter-btn[data-ws="lyft"] .dot { background: var(--ws-lyft); }
+
+  .filter-btn[data-ws="transaction"].active { background: var(--ws-transaction); border-color: var(--ws-transaction); }
+  .filter-btn[data-ws="travel"].active { background: var(--ws-travel); border-color: var(--ws-travel); }
+  .filter-btn[data-ws="tentpole"].active { background: var(--ws-tentpole); border-color: var(--ws-tentpole); }
+  .filter-btn[data-ws="lyft"].active { background: var(--ws-lyft); border-color: var(--ws-lyft); }
+
+  .filter-btn.active .dot { background: rgba(255,255,255,0.5); }
+
+  .filter-reset {
+    padding: 7px 14px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-left: 4px;
+  }
+
+  .filter-reset:hover { border-color: #ccc; color: var(--ink-light); }
+
+  /* ---- MAIN CONTAINER ---- */
+  .main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 40px 60px;
+  }
+
+  /* ---- GANTT ---- */
+  .gantt-wrapper {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .gantt-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .gantt {
+    min-width: 100%;
+    display: grid;
+    position: relative;
+  }
+
+  /* Month header row */
+  .gantt-months {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: #fafbfc;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .gantt-month-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ink-light);
+    padding: 14px 0 6px 12px;
+    border-right: 1px solid var(--border-light);
+  }
+
+  /* Date header row */
+  .gantt-dates {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    background: #fafbfc;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .gantt-date-cell {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    border-right: 1px solid var(--border-light);
+    position: relative;
+  }
+
+  .gantt-date-cell .day-num {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-light);
+    margin-bottom: 1px;
+  }
+
+  .gantt-date-cell .day-name {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--ink-muted);
+  }
+
+  .gantt-date-cell.weekend {
+    background: #f6f7f9;
+  }
+
+  .gantt-date-cell.weekend .day-num { color: var(--ink-muted); }
+
+  .gantt-date-cell.today {
+    background: var(--ws-transaction-bg);
+  }
+
+  .gantt-date-cell.today .day-num {
+    color: var(--ws-transaction);
+  }
+
+  .gantt-date-cell.month-start {
+    border-left: 2px solid var(--border);
+  }
+
+  /* Column body — one column per date, events stacked inside */
+  .gantt-body {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .gantt-col {
+    flex: 0 0 auto;
+    border-right: 1px solid var(--border-light);
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 60px;
+  }
+
+  .gantt-col.month-start {
+    border-left: 2px solid var(--border);
+  }
+
+  /* Event bars */
+  .event-bar {
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: default;
+    border: 1.5px solid transparent;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .event-bar .event-audience {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-top: 2px;
+    white-space: normal;
+  }
+
+  .event-bar .event-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-bar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    z-index: 5;
+  }
+
+  .event-bar.hidden {
+    display: none;
+  }
+
+  .event-bar[data-ws="transaction"] {
+    background: var(--ws-transaction-bg);
+    color: var(--ws-transaction);
+    border-color: var(--ws-transaction-border);
+  }
+
+  .event-bar[data-ws="travel"] {
+    background: var(--ws-travel-bg);
+    color: var(--ws-travel);
+    border-color: var(--ws-travel-border);
+  }
+
+  .event-bar[data-ws="tentpole"] {
+    background: var(--ws-tentpole-bg);
+    color: var(--ws-tentpole);
+    border-color: var(--ws-tentpole-border);
+  }
+
+  .event-bar[data-ws="lyft"] {
+    background: var(--ws-lyft-bg);
+    color: var(--ws-lyft);
+    border-color: var(--ws-lyft-border);
+  }
+
+  /* Tooltip */
+  .tooltip {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    background: var(--ink);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 300px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    pointer-events: none;
+  }
+
+  .tooltip.visible { display: block; }
+
+  .tooltip-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .tooltip-meta {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tooltip-ws-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  /* ---- DENSITY HEATMAP ---- */
+  .density-row {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    background: #fafbfc;
+  }
+
+  .density-cell {
+    flex: 0 0 auto;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 0;
+    color: var(--ink-muted);
+    border-right: 1px solid var(--border-light);
+    position: relative;
+  }
+
+  .density-cell.month-start {
+    border-left: 2px solid var(--border);
+  }
+
+  .density-cell .density-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .density-cell.d-0 .density-count { color: var(--ink-muted); opacity: 0.4; }
+  .density-cell.d-1 .density-count { background: #dbeafe; color: #1e40af; }
+  .density-cell.d-2 .density-count { background: #93c5fd; color: #1e3a8a; }
+  .density-cell.d-3 .density-count { background: #60a5fa; color: #fff; }
+  .density-cell.d-4 .density-count { background: #3b82f6; color: #fff; }
+  .density-cell.d-5 .density-count { background: #2563eb; color: #fff; }
+  .density-cell.d-6 .density-count { background: #1d4ed8; color: #fff; }
+  .density-cell.d-7 .density-count { background: #1e40af; color: #fff; }
+
+  .density-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-muted);
+    padding: 6px 12px;
+    white-space: nowrap;
+    border-right: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---- LEGEND ---- */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background: #fafbfc;
+    flex-wrap: wrap;
+  }
+
+  .legend-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-muted);
+    margin-right: 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-light);
+  }
+
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1.5px solid transparent;
+  }
+
+  .legend-swatch.transaction { background: var(--ws-transaction-bg); border-color: var(--ws-transaction-border); }
+  .legend-swatch.travel { background: var(--ws-travel-bg); border-color: var(--ws-travel-border); }
+  .legend-swatch.tentpole { background: var(--ws-tentpole-bg); border-color: var(--ws-tentpole-border); }
+  .legend-swatch.lyft { background: var(--ws-lyft-bg); border-color: var(--ws-lyft-border); }
+
+  /* ---- SUMMARY CARDS ---- */
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .summary-card .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+
+  .summary-card .value {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+  }
+
+  .summary-card .sub {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+
+  .footer a { color: var(--ws-transaction); text-decoration: none; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .header { padding: 32px 20px 28px; }
+    .header h1 { font-size: 24px; }
+    .controls { padding: 16px 20px 0; }
+    .main { padding: 16px 20px 40px; }
+    .summary { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Print */
+  @media print {
+    .controls { display: none; }
+    .header { padding: 24px 20px; }
+    .gantt-wrapper { box-shadow: none; border: 1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">BILL Spend & Expense</div>
+    <h1>FY26 Q4 Launch Calendar</h1>
+    <div class="header-sub">Travel, Transaction Agent, Lyft Integration & Product Tentpole — April to June 2025</div>
+  </div>
+</div>
+
+<div class="controls" id="controls">
+  <span class="controls-label">Filter:</span>
+  <button class="filter-btn active" data-ws="transaction" onclick="toggleFilter('transaction')">
+    <span class="dot"></span> Transaction Agent
+  </button>
+  <button class="filter-btn active" data-ws="travel" onclick="toggleFilter('travel')">
+    <span class="dot"></span> BILL Travel
+  </button>
+  <button class="filter-btn active" data-ws="tentpole" onclick="toggleFilter('tentpole')">
+    <span class="dot"></span> Tentpole
+  </button>
+  <button class="filter-btn active" data-ws="lyft" onclick="toggleFilter('lyft')">
+    <span class="dot"></span> Lyft Partnership
+  </button>
+  <button class="filter-reset" onclick="resetFilters()">Show All</button>
+</div>
+
+<div class="main">
+  <!-- Summary cards -->
+  <div class="summary" id="summary"></div>
+
+  <!-- Gantt chart -->
+  <div class="gantt-wrapper">
+    <div class="gantt-scroll" id="ganttScroll">
+      <div class="gantt" id="gantt"></div>
+    </div>
+    <div class="legend">
+      <span class="legend-title">Workstreams</span>
+      <span class="legend-item"><span class="legend-swatch transaction"></span> Transaction Agent</span>
+      <span class="legend-item"><span class="legend-swatch travel"></span> BILL Travel</span>
+      <span class="legend-item"><span class="legend-swatch tentpole"></span> Tentpole Moment</span>
+      <span class="legend-item"><span class="legend-swatch lyft"></span> Lyft Partnership</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  BILL Confidential &middot; S&E Product Marketing &middot; Updated March 2025
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip">
+  <div class="tooltip-title" id="tooltipTitle"></div>
+  <div class="tooltip-meta" id="tooltipMeta"></div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const events = [
+  // April 28
+  { date: '2025-04-28', name: 'Transaction Agent Launch Email', audience: 'All customers', ws: 'transaction' },
+  { date: '2025-04-28', name: 'Press Release & Blog — Tentpole', audience: 'General market', ws: 'tentpole' },
+  { date: '2025-04-28', name: 'Travel Web Updates', audience: 'General market', ws: 'travel' },
+  { date: '2025-04-28', name: 'Transaction Agent Web Updates', audience: 'General market', ws: 'transaction' },
+  { date: '2025-04-28', name: 'Transaction Agent Organic Social', audience: 'LinkedIn followers', ws: 'transaction' },
+  { date: '2025-04-28', name: 'Pendo Announcement — Admins', audience: 'Transaction Agent admins', ws: 'transaction' },
+  { date: '2025-04-28', name: 'Pendo Announcement — Spenders', audience: 'Spenders', ws: 'transaction' },
+
+  // April 29
+  { date: '2025-04-29', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
+
+  // May 5
+  { date: '2025-05-05', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
+
+  // May 6
+  { date: '2025-05-06', name: 'Transaction Agent Testimonial Social', audience: 'BILL followers', ws: 'transaction' },
+
+  // May 11
+  { date: '2025-05-11', name: 'Transaction Agent Testimonial Social', audience: 'BILL followers', ws: 'transaction' },
+
+  // May 12
+  { date: '2025-05-12', name: 'Travel Announcement Email', audience: 'Customers', ws: 'travel' },
+  { date: '2025-05-12', name: 'Travel Sizzle Launch — Organic Social', audience: 'BILL followers', ws: 'travel' },
+  { date: '2025-05-12', name: 'Travel Pendo Announcement', audience: 'All admins', ws: 'travel' },
+  { date: '2025-05-12', name: 'Travel Homepage Banner', audience: 'General market', ws: 'travel' },
+
+  // May 15
+  { date: '2025-05-15', name: 'Tentpole Customer Email from Rene', audience: 'All admins', ws: 'tentpole' },
+  { date: '2025-05-15', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
+
+  // May 19
+  { date: '2025-05-19', name: 'Lyft Partnership Launch Email', audience: 'Admins (ground transport spenders)', ws: 'lyft' },
+
+  // May 21
+  { date: '2025-05-21', name: 'Travel Webinar Email 2', audience: 'Customers', ws: 'travel' },
+
+  // May 26
+  { date: '2025-05-26', name: 'Travel Webinar Email 3', audience: 'Customers', ws: 'travel' },
+
+  // June 2
+  { date: '2025-06-02', name: 'Travel Webinar Email 4', audience: 'Customers', ws: 'travel' },
+
+  // June 4
+  { date: '2025-06-04', name: 'Travel Webinar (incl. Tentpole messaging)', audience: 'Customers', ws: 'travel' },
+
+  // June 11
+  { date: '2025-06-11', name: 'Travel Webinar Follow-up', audience: 'Webinar sign-ups', ws: 'travel' },
+  { date: '2025-06-11', name: 'S&E Customer Newsletter', audience: 'Customer admins', ws: 'tentpole' },
+
+  // June 15
+  { date: '2025-06-15', name: 'Influencer Marketing', audience: 'Influencer audience', ws: 'tentpole' },
+];
+
+const wsLabels = {
+  transaction: 'Transaction Agent',
+  travel: 'BILL Travel',
+  tentpole: 'Tentpole',
+  lyft: 'Lyft Partnership'
+};
+
+const wsColors = {
+  transaction: '#0066FF',
+  travel: '#059669',
+  tentpole: '#f97316',
+  lyft: '#7c3aed'
+};
+
+// ============================================================
+// ACTIVE DATES ONLY — skip days with no events
+// ============================================================
+const activeDateSet = new Set(events.map(e => e.date));
+const activeDates = [...activeDateSet].sort();
+const days = activeDates.map(d => new Date(d + 'T00:00:00'));
+const COL_W = 220; // wide enough to read full event names
+
+const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function fmtDate(d) {
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function fmtDateReadable(str) {
+  const d = new Date(str + 'T00:00:00');
+  return monthNames[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+
+// ============================================================
+// FILTERS
+// ============================================================
+let activeFilters = new Set(['transaction', 'travel', 'tentpole', 'lyft']);
+
+function toggleFilter(ws) {
+  const btn = document.querySelector(`.filter-btn[data-ws="${ws}"]`);
+  if (activeFilters.has(ws)) {
+    activeFilters.delete(ws);
+    btn.classList.remove('active');
+  } else {
+    activeFilters.add(ws);
+    btn.classList.add('active');
+  }
+  applyFilters();
+}
+
+function resetFilters() {
+  activeFilters = new Set(['transaction', 'travel', 'tentpole', 'lyft']);
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.add('active'));
+  applyFilters();
+}
+
+function applyFilters() {
+  document.querySelectorAll('.event-bar').forEach(bar => {
+    const ws = bar.dataset.ws;
+    if (activeFilters.has(ws)) {
+      bar.classList.remove('hidden');
+    } else {
+      bar.classList.add('hidden');
+    }
+  });
+  updateDensity();
+  updateSummary();
+}
+
+// ============================================================
+// SORT events by date, then by workstream
+// ============================================================
+const wsOrder = { tentpole: 0, transaction: 1, travel: 2, lyft: 3 };
+events.sort((a, b) => {
+  if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+  return (wsOrder[a.ws] || 0) - (wsOrder[b.ws] || 0);
+});
+
+// ============================================================
+// BUILD GANTT
+// ============================================================
+function buildGantt() {
+  const gantt = document.getElementById('gantt');
+  const totalW = days.length * COL_W;
+  gantt.style.width = totalW + 'px';
+
+  // Date header
+  let dateHTML = '';
+  days.forEach((d, i) => {
+    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+    const prevMonth = i > 0 ? days[i-1].getMonth() : -1;
+    const isMonthStart = d.getMonth() !== prevMonth;
+    const cls = [isWeekend ? 'weekend' : '', isMonthStart ? 'month-start' : ''].filter(Boolean).join(' ');
+    dateHTML += `<div class="gantt-date-cell ${cls}" style="width:${COL_W}px">
+      <span class="day-num">${monthNames[d.getMonth()]} ${d.getDate()}</span>
+      <span class="day-name">${dayNames[d.getDay()]}</span>
+    </div>`;
+  });
+
+  // Month labels row
+  let monthHTML = '';
+  let currentMonth = -1;
+  let monthStartIdx = 0;
+  days.forEach((d, i) => {
+    if (d.getMonth() !== currentMonth) {
+      if (currentMonth !== -1) {
+        const span = i - monthStartIdx;
+        monthHTML += `<div class="gantt-month-label" style="width:${span * COL_W}px">${monthNames[currentMonth]} ${days[monthStartIdx].getFullYear()}</div>`;
+      }
+      currentMonth = d.getMonth();
+      monthStartIdx = i;
+    }
+    if (i === days.length - 1) {
+      const span = i - monthStartIdx + 1;
+      monthHTML += `<div class="gantt-month-label" style="width:${span * COL_W}px">${monthNames[currentMonth]} ${days[monthStartIdx].getFullYear()}</div>`;
+    }
+  });
+
+  // Density row
+  const densityMap = {};
+  days.forEach(d => densityMap[fmtDate(d)] = 0);
+  events.forEach(e => { if (densityMap[e.date] !== undefined) densityMap[e.date]++; });
+
+  let densityHTML = '';
+  days.forEach((d, i) => {
+    const key = fmtDate(d);
+    const count = densityMap[key];
+    const prevMonth = i > 0 ? days[i-1].getMonth() : -1;
+    const isMonthStart = d.getMonth() !== prevMonth;
+    const cls = isMonthStart ? 'month-start' : '';
+    densityHTML += `<div class="density-cell d-${Math.min(count, 7)} ${cls}" style="width:${COL_W}px" data-date="${key}">
+      <span class="density-count">${count || '–'}</span>
+    </div>`;
+  });
+
+  // Group events by date
+  const eventsByDate = {};
+  events.forEach((evt, idx) => {
+    if (!eventsByDate[evt.date]) eventsByDate[evt.date] = [];
+    eventsByDate[evt.date].push({ ...evt, idx });
+  });
+
+  // Build columns — one per date
+  let colsHTML = '';
+  days.forEach((d, i) => {
+    const key = fmtDate(d);
+    const prevMonth = i > 0 ? days[i-1].getMonth() : -1;
+    const isMonthStart = d.getMonth() !== prevMonth;
+    const cls = isMonthStart ? 'month-start' : '';
+    const dateEvents = eventsByDate[key] || [];
+
+    let barsHTML = '';
+    dateEvents.forEach(evt => {
+      barsHTML += `<div class="event-bar" data-ws="${evt.ws}" data-idx="${evt.idx}"
+        onmouseenter="showTooltip(event, ${evt.idx})"
+        onmousemove="moveTooltip(event)"
+        onmouseleave="hideTooltip()">
+        <div class="event-content">
+          <span>${evt.name}</span>
+          <span class="event-audience">${evt.audience}</span>
+        </div>
+      </div>`;
+    });
+
+    colsHTML += `<div class="gantt-col ${cls}" style="width:${COL_W}px">${barsHTML}</div>`;
+  });
+
+  gantt.innerHTML = `
+    <div class="gantt-months">${monthHTML}</div>
+    <div class="gantt-dates">${dateHTML}</div>
+    <div class="density-row" id="densityRow">${densityHTML}</div>
+    <div class="gantt-body">${colsHTML}</div>
+  `;
+}
+
+// ============================================================
+// UPDATE DENSITY after filter
+// ============================================================
+function updateDensity() {
+  const densityMap = {};
+  days.forEach(d => densityMap[fmtDate(d)] = 0);
+  events.forEach(e => {
+    if (activeFilters.has(e.ws) && densityMap[e.date] !== undefined) {
+      densityMap[e.date]++;
+    }
+  });
+
+  document.querySelectorAll('.density-cell').forEach(cell => {
+    const key = cell.dataset.date;
+    const count = densityMap[key] || 0;
+    // Reset classes
+    for (let i = 0; i <= 7; i++) cell.classList.remove('d-' + i);
+    cell.classList.add('d-' + Math.min(count, 7));
+    cell.querySelector('.density-count').textContent = count || '–';
+  });
+}
+
+// ============================================================
+// SUMMARY CARDS
+// ============================================================
+function updateSummary() {
+  const visible = events.filter(e => activeFilters.has(e.ws));
+  const byWs = {};
+  visible.forEach(e => { byWs[e.ws] = (byWs[e.ws] || 0) + 1; });
+
+  // Find busiest date
+  const byDate = {};
+  visible.forEach(e => { byDate[e.date] = (byDate[e.date] || 0) + 1; });
+  let busiestDate = '';
+  let busiestCount = 0;
+  for (const [d, c] of Object.entries(byDate)) {
+    if (c > busiestCount) { busiestCount = c; busiestDate = d; }
+  }
+
+  const html = `
+    <div class="summary-card">
+      <div class="label">Total Activities</div>
+      <div class="value">${visible.length}</div>
+      <div class="sub">Across ${Object.keys(byWs).length} workstreams</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Busiest Day</div>
+      <div class="value">${busiestDate ? fmtDateReadable(busiestDate) : '—'}</div>
+      <div class="sub">${busiestCount} activities scheduled</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Active Dates</div>
+      <div class="value">${days.length}</div>
+      <div class="sub">Apr 28 – Jun 15, 2025</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Active Workstreams</div>
+      <div class="value">${Object.keys(byWs).length}</div>
+      <div class="sub">${Object.keys(byWs).map(k => wsLabels[k]).join(', ')}</div>
+    </div>
+  `;
+
+  document.getElementById('summary').innerHTML = html;
+}
+
+// ============================================================
+// TOOLTIP
+// ============================================================
+const tooltip = document.getElementById('tooltip');
+const tooltipTitle = document.getElementById('tooltipTitle');
+const tooltipMeta = document.getElementById('tooltipMeta');
+
+function showTooltip(e, idx) {
+  const evt = events[idx];
+  tooltipTitle.innerHTML = `<span class="tooltip-ws-dot" style="background:${wsColors[evt.ws]}"></span>${evt.name}`;
+  tooltipMeta.innerHTML = `
+    <span>${fmtDateReadable(evt.date)}</span>
+    <span>Audience: ${evt.audience}</span>
+    <span>Workstream: ${wsLabels[evt.ws]}</span>
+  `;
+  tooltip.classList.add('visible');
+  moveTooltip(e);
+}
+
+function moveTooltip(e) {
+  let x = e.clientX + 14;
+  let y = e.clientY + 14;
+  const tw = tooltip.offsetWidth;
+  const th = tooltip.offsetHeight;
+  if (x + tw > window.innerWidth - 12) x = e.clientX - tw - 10;
+  if (y + th > window.innerHeight - 12) y = e.clientY - th - 10;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+
+function hideTooltip() {
+  tooltip.classList.remove('visible');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildGantt();
+updateSummary();
+
+// Scroll to first event area
+document.getElementById('ganttScroll').scrollLeft = 0;
+</script>
+
+</body>
+</html>
