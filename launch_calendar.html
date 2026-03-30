@@ -22,7 +22,6 @@
     --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
 
-    /* Workstream colors */
     --ws-transaction: #0066FF;
     --ws-transaction-bg: #EBF2FF;
     --ws-transaction-border: #B3D1FF;
@@ -139,22 +138,9 @@
     user-select: none;
   }
 
-  .filter-btn:hover {
-    border-color: #ccc;
-    box-shadow: var(--shadow);
-  }
-
-  .filter-btn.active {
-    color: #fff;
-    border-color: transparent;
-  }
-
-  .filter-btn .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .filter-btn:hover { border-color: #ccc; box-shadow: var(--shadow); }
+  .filter-btn.active { color: #fff; border-color: transparent; }
+  .filter-btn .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
   .filter-btn[data-ws="transaction"] .dot { background: var(--ws-transaction); }
   .filter-btn[data-ws="travel"] .dot { background: var(--ws-travel); }
@@ -184,6 +170,99 @@
 
   .filter-reset:hover { border-color: #ccc; color: var(--ink-light); }
 
+  /* ---- ADD ACTIVITY FORM ---- */
+  .add-form {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 40px 0;
+  }
+
+  .add-form-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1.5px dashed var(--border);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .add-form-toggle:hover { border-color: var(--ws-transaction); color: var(--ws-transaction); }
+
+  .add-form-panel {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-top: 12px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .add-form-panel.open { display: block; }
+
+  .add-form-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .add-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .add-field label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-muted);
+  }
+
+  .add-field input,
+  .add-field select {
+    padding: 8px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .add-field input:focus,
+  .add-field select:focus { border-color: var(--ws-transaction); }
+
+  .add-btn {
+    padding: 8px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: var(--ws-transaction);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+    height: 38px;
+  }
+
+  .add-btn:hover { background: #0052cc; }
+
   /* ---- MAIN CONTAINER ---- */
   .main {
     max-width: 1400px;
@@ -200,18 +279,10 @@
     overflow: hidden;
   }
 
-  .gantt-scroll {
-    overflow-x: auto;
-    overflow-y: visible;
-  }
+  .gantt-scroll { overflow-x: auto; overflow-y: visible; }
 
-  .gantt {
-    min-width: 100%;
-    display: grid;
-    position: relative;
-  }
+  .gantt { min-width: 100%; display: grid; position: relative; }
 
-  /* Month header row */
   .gantt-months {
     display: flex;
     border-bottom: 1px solid var(--border);
@@ -231,7 +302,6 @@
     border-right: 1px solid var(--border-light);
   }
 
-  /* Date header row */
   .gantt-dates {
     display: flex;
     border-bottom: 2px solid var(--border);
@@ -269,29 +339,12 @@
     color: var(--ink-muted);
   }
 
-  .gantt-date-cell.weekend {
-    background: #f6f7f9;
-  }
-
+  .gantt-date-cell.weekend { background: #f6f7f9; }
   .gantt-date-cell.weekend .day-num { color: var(--ink-muted); }
+  .gantt-date-cell.month-start { border-left: 2px solid var(--border); }
 
-  .gantt-date-cell.today {
-    background: var(--ws-transaction-bg);
-  }
-
-  .gantt-date-cell.today .day-num {
-    color: var(--ws-transaction);
-  }
-
-  .gantt-date-cell.month-start {
-    border-left: 2px solid var(--border);
-  }
-
-  /* Column body — one column per date, events stacked inside */
-  .gantt-body {
-    display: flex;
-    align-items: flex-start;
-  }
+  /* Column body */
+  .gantt-body { display: flex; align-items: flex-start; }
 
   .gantt-col {
     flex: 0 0 auto;
@@ -301,10 +354,13 @@
     flex-direction: column;
     gap: 6px;
     min-height: 60px;
+    transition: background 0.15s;
   }
 
-  .gantt-col.month-start {
-    border-left: 2px solid var(--border);
+  .gantt-col.month-start { border-left: 2px solid var(--border); }
+
+  .gantt-col.drag-over {
+    background: #f0f4ff;
   }
 
   /* Event bars */
@@ -315,11 +371,12 @@
     padding: 8px 12px;
     font-size: 12px;
     font-weight: 600;
-    cursor: default;
+    cursor: grab;
     border: 1.5px solid transparent;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.15s;
     white-space: normal;
     word-wrap: break-word;
+    position: relative;
   }
 
   .event-bar .event-audience {
@@ -334,6 +391,8 @@
   .event-bar .event-content {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-width: 0;
   }
 
   .event-bar:hover {
@@ -342,33 +401,43 @@
     z-index: 5;
   }
 
-  .event-bar.hidden {
+  .event-bar:active { cursor: grabbing; }
+
+  .event-bar.dragging {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+
+  .event-bar.hidden { display: none; }
+
+  .event-bar[data-ws="transaction"] { background: var(--ws-transaction-bg); color: var(--ws-transaction); border-color: var(--ws-transaction-border); }
+  .event-bar[data-ws="travel"] { background: var(--ws-travel-bg); color: var(--ws-travel); border-color: var(--ws-travel-border); }
+  .event-bar[data-ws="tentpole"] { background: var(--ws-tentpole-bg); color: var(--ws-tentpole); border-color: var(--ws-tentpole-border); }
+  .event-bar[data-ws="lyft"] { background: var(--ws-lyft-bg); color: var(--ws-lyft); border-color: var(--ws-lyft-border); }
+
+  /* Delete button on tile */
+  .event-delete {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.08);
+    color: inherit;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
     display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.1s, background 0.1s;
   }
 
-  .event-bar[data-ws="transaction"] {
-    background: var(--ws-transaction-bg);
-    color: var(--ws-transaction);
-    border-color: var(--ws-transaction-border);
-  }
-
-  .event-bar[data-ws="travel"] {
-    background: var(--ws-travel-bg);
-    color: var(--ws-travel);
-    border-color: var(--ws-travel-border);
-  }
-
-  .event-bar[data-ws="tentpole"] {
-    background: var(--ws-tentpole-bg);
-    color: var(--ws-tentpole);
-    border-color: var(--ws-tentpole-border);
-  }
-
-  .event-bar[data-ws="lyft"] {
-    background: var(--ws-lyft-bg);
-    color: var(--ws-lyft);
-    border-color: var(--ws-lyft-border);
-  }
+  .event-bar:hover .event-delete { display: flex; }
+  .event-delete:hover { opacity: 1; background: rgba(220,38,38,0.15); color: #dc2626; }
 
   /* Tooltip */
   .tooltip {
@@ -387,36 +456,12 @@
   }
 
   .tooltip.visible { display: block; }
+  .tooltip-title { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+  .tooltip-meta { color: rgba(255,255,255,0.6); font-size: 11px; display: flex; flex-direction: column; gap: 2px; }
+  .tooltip-ws-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
 
-  .tooltip-title {
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-
-  .tooltip-meta {
-    color: rgba(255,255,255,0.6);
-    font-size: 11px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .tooltip-ws-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    margin-right: 5px;
-    vertical-align: middle;
-  }
-
-  /* ---- DENSITY HEATMAP ---- */
-  .density-row {
-    display: flex;
-    border-bottom: 2px solid var(--border);
-    background: #fafbfc;
-  }
+  /* Density */
+  .density-row { display: flex; border-bottom: 2px solid var(--border); background: #fafbfc; }
 
   .density-cell {
     flex: 0 0 auto;
@@ -426,12 +471,9 @@
     padding: 6px 0;
     color: var(--ink-muted);
     border-right: 1px solid var(--border-light);
-    position: relative;
   }
 
-  .density-cell.month-start {
-    border-left: 2px solid var(--border);
-  }
+  .density-cell.month-start { border-left: 2px solid var(--border); }
 
   .density-cell .density-count {
     display: inline-flex;
@@ -453,20 +495,7 @@
   .density-cell.d-6 .density-count { background: #1d4ed8; color: #fff; }
   .density-cell.d-7 .density-count { background: #1e40af; color: #fff; }
 
-  .density-label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ink-muted);
-    padding: 6px 12px;
-    white-space: nowrap;
-    border-right: 1px solid var(--border-light);
-    display: flex;
-    align-items: center;
-  }
-
-  /* ---- LEGEND ---- */
+  /* Legend */
   .legend {
     display: flex;
     align-items: center;
@@ -477,98 +506,36 @@
     flex-wrap: wrap;
   }
 
-  .legend-title {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ink-muted);
-    margin-right: 4px;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-light);
-  }
-
-  .legend-swatch {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    border: 1.5px solid transparent;
-  }
+  .legend-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-muted); margin-right: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--ink-light); }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1.5px solid transparent; }
 
   .legend-swatch.transaction { background: var(--ws-transaction-bg); border-color: var(--ws-transaction-border); }
   .legend-swatch.travel { background: var(--ws-travel-bg); border-color: var(--ws-travel-border); }
   .legend-swatch.tentpole { background: var(--ws-tentpole-bg); border-color: var(--ws-tentpole-border); }
   .legend-swatch.lyft { background: var(--ws-lyft-bg); border-color: var(--ws-lyft-border); }
 
-  /* ---- SUMMARY CARDS ---- */
-  .summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-  }
+  /* Summary */
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow); }
+  .summary-card .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-muted); margin-bottom: 6px; }
+  .summary-card .value { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); }
+  .summary-card .sub { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
 
-  .summary-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    box-shadow: var(--shadow);
-  }
+  /* Footer */
+  .footer { max-width: 1400px; margin: 0 auto; padding: 0 40px 40px; text-align: center; font-size: 12px; color: var(--ink-muted); }
 
-  .summary-card .label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ink-muted);
-    margin-bottom: 6px;
-  }
-
-  .summary-card .value {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: var(--ink);
-  }
-
-  .summary-card .sub {
-    font-size: 12px;
-    color: var(--ink-muted);
-    margin-top: 2px;
-  }
-
-  /* ---- FOOTER ---- */
-  .footer {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px 40px;
-    text-align: center;
-    font-size: 12px;
-    color: var(--ink-muted);
-  }
-
-  .footer a { color: var(--ws-transaction); text-decoration: none; }
-
-  /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     .header { padding: 32px 20px 28px; }
     .header h1 { font-size: 24px; }
-    .controls { padding: 16px 20px 0; }
+    .controls, .add-form { padding-left: 20px; padding-right: 20px; }
     .main { padding: 16px 20px 40px; }
     .summary { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Print */
   @media print {
-    .controls { display: none; }
+    .controls, .add-form { display: none; }
+    .event-delete { display: none !important; }
     .header { padding: 24px 20px; }
     .gantt-wrapper { box-shadow: none; border: 1px solid #ddd; }
   }
@@ -580,32 +547,56 @@
   <div class="header-inner">
     <div class="header-eyebrow">BILL Spend & Expense</div>
     <h1>FY26 Q4 Launch Calendar</h1>
-    <div class="header-sub">Travel, Transaction Agent, Lyft Integration & Product Tentpole — April to June 2025</div>
+    <div class="header-sub">Travel, Transaction Agent, Lyft Integration & Product Tentpole — April to June 2026</div>
   </div>
 </div>
 
 <div class="controls" id="controls">
   <span class="controls-label">Filter:</span>
-  <button class="filter-btn active" data-ws="transaction" onclick="toggleFilter('transaction')">
-    <span class="dot"></span> Transaction Agent
-  </button>
-  <button class="filter-btn active" data-ws="travel" onclick="toggleFilter('travel')">
-    <span class="dot"></span> BILL Travel
-  </button>
-  <button class="filter-btn active" data-ws="tentpole" onclick="toggleFilter('tentpole')">
-    <span class="dot"></span> Tentpole
-  </button>
-  <button class="filter-btn active" data-ws="lyft" onclick="toggleFilter('lyft')">
-    <span class="dot"></span> Lyft Partnership
-  </button>
+  <button class="filter-btn active" data-ws="transaction" onclick="toggleFilter('transaction')"><span class="dot"></span> Transaction Agent</button>
+  <button class="filter-btn active" data-ws="travel" onclick="toggleFilter('travel')"><span class="dot"></span> BILL Travel</button>
+  <button class="filter-btn active" data-ws="tentpole" onclick="toggleFilter('tentpole')"><span class="dot"></span> Tentpole</button>
+  <button class="filter-btn active" data-ws="lyft" onclick="toggleFilter('lyft')"><span class="dot"></span> Lyft Partnership</button>
   <button class="filter-reset" onclick="resetFilters()">Show All</button>
+  <span style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+    <span id="saveStatus" style="font-size:11px; color:var(--ink-muted); opacity:0; transition:opacity 0.3s;"></span>
+    <button type="button" class="filter-reset" onclick="exportCalendar()" style="margin-left:0;">Export HTML</button>
+    <button type="button" class="filter-reset" onclick="resetData()" style="margin-left:0; color:#dc2626; border-color:#fca5a5;">Reset to Default</button>
+  </span>
+</div>
+
+<div class="add-form">
+  <button type="button" class="add-form-toggle" onclick="toggleAddForm()">+ Add Activity</button>
+  <div class="add-form-panel" id="addPanel">
+    <div class="add-form-row">
+      <div class="add-field" style="flex:2">
+        <label>Activity Name</label>
+        <input type="text" id="addName" placeholder="e.g. Partner Webinar">
+      </div>
+      <div class="add-field">
+        <label>Audience</label>
+        <input type="text" id="addAudience" placeholder="e.g. All customers">
+      </div>
+      <div class="add-field" style="flex:0.7">
+        <label>Date</label>
+        <input type="date" id="addDate">
+      </div>
+      <div class="add-field" style="flex:0.7">
+        <label>Workstream</label>
+        <select id="addWs">
+          <option value="transaction">Transaction Agent</option>
+          <option value="travel">BILL Travel</option>
+          <option value="tentpole">Tentpole</option>
+          <option value="lyft">Lyft Partnership</option>
+        </select>
+      </div>
+      <button type="button" class="add-btn" onclick="addActivity()">Add</button>
+    </div>
+  </div>
 </div>
 
 <div class="main">
-  <!-- Summary cards -->
   <div class="summary" id="summary"></div>
-
-  <!-- Gantt chart -->
   <div class="gantt-wrapper">
     <div class="gantt-scroll" id="ganttScroll">
       <div class="gantt" id="gantt"></div>
@@ -620,11 +611,8 @@
   </div>
 </div>
 
-<div class="footer">
-  BILL Confidential &middot; S&E Product Marketing &middot; Updated March 2025
-</div>
+<div class="footer">BILL Confidential &middot; S&E Product Marketing &middot; Updated March 2025</div>
 
-<!-- Tooltip -->
 <div class="tooltip" id="tooltip">
   <div class="tooltip-title" id="tooltipTitle"></div>
   <div class="tooltip-meta" id="tooltipMeta"></div>
@@ -632,95 +620,74 @@
 
 <script>
 // ============================================================
-// DATA
+// DATA — mutable array
 // ============================================================
-const events = [
-  // April 28
-  { date: '2025-04-28', name: 'Transaction Agent Launch Email', audience: 'All customers', ws: 'transaction' },
-  { date: '2025-04-28', name: 'Press Release & Blog — Tentpole', audience: 'General market', ws: 'tentpole' },
-  { date: '2025-04-28', name: 'Travel Web Updates', audience: 'General market', ws: 'travel' },
-  { date: '2025-04-28', name: 'Transaction Agent Web Updates', audience: 'General market', ws: 'transaction' },
-  { date: '2025-04-28', name: 'Transaction Agent Organic Social', audience: 'LinkedIn followers', ws: 'transaction' },
-  { date: '2025-04-28', name: 'Pendo Announcement — Admins', audience: 'Transaction Agent admins', ws: 'transaction' },
-  { date: '2025-04-28', name: 'Pendo Announcement — Spenders', audience: 'Spenders', ws: 'transaction' },
-
-  // April 29
-  { date: '2025-04-29', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
-
-  // May 5
-  { date: '2025-05-05', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
-
-  // May 6
-  { date: '2025-05-06', name: 'Transaction Agent Testimonial Social', audience: 'BILL followers', ws: 'transaction' },
-
-  // May 11
-  { date: '2025-05-11', name: 'Transaction Agent Testimonial Social', audience: 'BILL followers', ws: 'transaction' },
-
-  // May 12
-  { date: '2025-05-12', name: 'Travel Announcement Email', audience: 'Customers', ws: 'travel' },
-  { date: '2025-05-12', name: 'Travel Sizzle Launch — Organic Social', audience: 'BILL followers', ws: 'travel' },
-  { date: '2025-05-12', name: 'Travel Pendo Announcement', audience: 'All admins', ws: 'travel' },
-  { date: '2025-05-12', name: 'Travel Homepage Banner', audience: 'General market', ws: 'travel' },
-
-  // May 15
-  { date: '2025-05-15', name: 'Tentpole Customer Email from Rene', audience: 'All admins', ws: 'tentpole' },
-  { date: '2025-05-15', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
-
-  // May 19
-  { date: '2025-05-19', name: 'Lyft Partnership Launch Email', audience: 'Admins (ground transport spenders)', ws: 'lyft' },
-
-  // May 21
-  { date: '2025-05-21', name: 'Travel Webinar Email 2', audience: 'Customers', ws: 'travel' },
-
-  // May 26
-  { date: '2025-05-26', name: 'Travel Webinar Email 3', audience: 'Customers', ws: 'travel' },
-
-  // June 2
-  { date: '2025-06-02', name: 'Travel Webinar Email 4', audience: 'Customers', ws: 'travel' },
-
-  // June 4
-  { date: '2025-06-04', name: 'Travel Webinar (incl. Tentpole messaging)', audience: 'Customers', ws: 'travel' },
-
-  // June 11
-  { date: '2025-06-11', name: 'Travel Webinar Follow-up', audience: 'Webinar sign-ups', ws: 'travel' },
-  { date: '2025-06-11', name: 'S&E Customer Newsletter', audience: 'Customer admins', ws: 'tentpole' },
-
-  // June 15
-  { date: '2025-06-15', name: 'Influencer Marketing', audience: 'Influencer audience', ws: 'tentpole' },
+const DEFAULT_EVENTS = [
+  { date: '2026-04-28', name: 'Transaction Agent Launch Email', audience: 'All customers', ws: 'transaction' },
+  { date: '2026-04-28', name: 'Press Release & Blog — Tentpole', audience: 'General market', ws: 'tentpole' },
+  { date: '2026-04-28', name: 'Travel Web Updates', audience: 'General market', ws: 'travel' },
+  { date: '2026-04-28', name: 'Transaction Agent Web Updates', audience: 'General market', ws: 'transaction' },
+  { date: '2026-04-28', name: 'Transaction Agent Organic Social', audience: 'LinkedIn followers', ws: 'transaction' },
+  { date: '2026-04-28', name: 'Pendo Announcement — Admins', audience: 'Transaction Agent admins', ws: 'transaction' },
+  { date: '2026-04-28', name: 'Pendo Announcement — Spenders', audience: 'Spenders', ws: 'transaction' },
+  { date: '2026-04-29', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
+  { date: '2026-05-05', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
+  { date: '2026-05-06', name: 'Transaction Agent Testimonial Social', audience: 'BILL followers', ws: 'transaction' },
+  { date: '2026-05-11', name: 'Transaction Agent Testimonial Social', audience: 'BILL followers', ws: 'transaction' },
+  { date: '2026-05-12', name: 'Travel Announcement Email', audience: 'Customers', ws: 'travel' },
+  { date: '2026-05-12', name: 'Travel Sizzle Launch — Organic Social', audience: 'BILL followers', ws: 'travel' },
+  { date: '2026-05-12', name: 'Travel Pendo Announcement', audience: 'All admins', ws: 'travel' },
+  { date: '2026-05-12', name: 'Travel Homepage Banner', audience: 'General market', ws: 'travel' },
+  { date: '2026-05-15', name: 'Tentpole Customer Email from Rene', audience: 'All admins', ws: 'tentpole' },
+  { date: '2026-05-15', name: 'Tentpole Organic Social', audience: 'LinkedIn followers', ws: 'tentpole' },
+  { date: '2026-05-19', name: 'Lyft Partnership Launch Email', audience: 'Admins (ground transport spenders)', ws: 'lyft' },
+  { date: '2026-05-21', name: 'Travel Webinar Email 2', audience: 'Customers', ws: 'travel' },
+  { date: '2026-05-26', name: 'Travel Webinar Email 3', audience: 'Customers', ws: 'travel' },
+  { date: '2026-06-02', name: 'Travel Webinar Email 4', audience: 'Customers', ws: 'travel' },
+  { date: '2026-06-04', name: 'Travel Webinar (incl. Tentpole messaging)', audience: 'Customers', ws: 'travel' },
+  { date: '2026-06-11', name: 'Travel Webinar Follow-up', audience: 'Webinar sign-ups', ws: 'travel' },
+  { date: '2026-06-11', name: 'S&E Customer Newsletter', audience: 'Customer admins', ws: 'tentpole' },
+  { date: '2026-06-15', name: 'Influencer Marketing', audience: 'Influencer audience', ws: 'tentpole' },
 ];
 
-const wsLabels = {
-  transaction: 'Transaction Agent',
-  travel: 'BILL Travel',
-  tentpole: 'Tentpole',
-  lyft: 'Lyft Partnership'
-};
+const STORAGE_KEY = 'bill_launch_calendar_events';
 
-const wsColors = {
-  transaction: '#0066FF',
-  travel: '#059669',
-  tentpole: '#f97316',
-  lyft: '#7c3aed'
-};
+// Load from localStorage or fall back to defaults
+function loadEvents() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_EVENTS));
+}
 
-// ============================================================
-// ACTIVE DATES ONLY — skip days with no events
-// ============================================================
-const activeDateSet = new Set(events.map(e => e.date));
-const activeDates = [...activeDateSet].sort();
-const days = activeDates.map(d => new Date(d + 'T00:00:00'));
-const COL_W = 220; // wide enough to read full event names
+function saveEvents() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+  const el = document.getElementById('saveStatus');
+  el.textContent = 'Saved';
+  el.style.opacity = '1';
+  setTimeout(() => { el.style.opacity = '0'; }, 1500);
+}
 
+const events = loadEvents();
+
+const wsLabels = { transaction: 'Transaction Agent', travel: 'BILL Travel', tentpole: 'Tentpole', lyft: 'Lyft Partnership' };
+const wsColors = { transaction: '#0066FF', travel: '#059669', tentpole: '#f97316', lyft: '#7c3aed' };
+const wsOrder = { tentpole: 0, transaction: 1, travel: 2, lyft: 3 };
 const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const COL_W = 220;
 
 function fmtDate(d) {
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
-
 function fmtDateReadable(str) {
   const d = new Date(str + 'T00:00:00');
   return monthNames[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+function getActiveDays() {
+  const dateSet = new Set(events.map(e => e.date));
+  return [...dateSet].sort().map(d => new Date(d + 'T00:00:00'));
 }
 
 // ============================================================
@@ -730,13 +697,8 @@ let activeFilters = new Set(['transaction', 'travel', 'tentpole', 'lyft']);
 
 function toggleFilter(ws) {
   const btn = document.querySelector(`.filter-btn[data-ws="${ws}"]`);
-  if (activeFilters.has(ws)) {
-    activeFilters.delete(ws);
-    btn.classList.remove('active');
-  } else {
-    activeFilters.add(ws);
-    btn.classList.add('active');
-  }
+  if (activeFilters.has(ws)) { activeFilters.delete(ws); btn.classList.remove('active'); }
+  else { activeFilters.add(ws); btn.classList.add('active'); }
   applyFilters();
 }
 
@@ -748,33 +710,124 @@ function resetFilters() {
 
 function applyFilters() {
   document.querySelectorAll('.event-bar').forEach(bar => {
-    const ws = bar.dataset.ws;
-    if (activeFilters.has(ws)) {
-      bar.classList.remove('hidden');
-    } else {
-      bar.classList.add('hidden');
-    }
+    bar.classList.toggle('hidden', !activeFilters.has(bar.dataset.ws));
   });
   updateDensity();
   updateSummary();
 }
 
 // ============================================================
-// SORT events by date, then by workstream
+// ADD ACTIVITY
 // ============================================================
-const wsOrder = { tentpole: 0, transaction: 1, travel: 2, lyft: 3 };
-events.sort((a, b) => {
-  if (a.date !== b.date) return a.date < b.date ? -1 : 1;
-  return (wsOrder[a.ws] || 0) - (wsOrder[b.ws] || 0);
-});
+function toggleAddForm() {
+  document.getElementById('addPanel').classList.toggle('open');
+}
+
+function addActivity() {
+  const name = document.getElementById('addName').value.trim();
+  const audience = document.getElementById('addAudience').value.trim();
+  const date = document.getElementById('addDate').value;
+  const ws = document.getElementById('addWs').value;
+  if (!name || !date) return;
+
+  events.push({ date, name, audience: audience || '—', ws });
+  // Clear form
+  document.getElementById('addName').value = '';
+  document.getElementById('addAudience').value = '';
+  document.getElementById('addDate').value = '';
+
+  rebuildAll();
+}
 
 // ============================================================
-// BUILD GANTT
+// DELETE ACTIVITY
 // ============================================================
+function deleteEvent(idx) {
+  events.splice(idx, 1);
+  rebuildAll();
+}
+
+// ============================================================
+// DRAG AND DROP
+// ============================================================
+let dragIdx = null;
+
+function onDragStart(e, idx) {
+  dragIdx = idx;
+  e.dataTransfer.effectAllowed = 'move';
+  e.target.classList.add('dragging');
+}
+
+function onDragEnd(e) {
+  e.target.classList.remove('dragging');
+  document.querySelectorAll('.gantt-col').forEach(c => c.classList.remove('drag-over'));
+  dragIdx = null;
+}
+
+function onColDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('drag-over');
+}
+
+function onColDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+
+function onColDrop(e, dateStr) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (dragIdx !== null && events[dragIdx]) {
+    events[dragIdx].date = dateStr;
+    rebuildAll();
+  }
+  dragIdx = null;
+}
+
+// ============================================================
+// BUILD / REBUILD
+// ============================================================
+function rebuildAll() {
+  // Re-sort
+  events.sort((a, b) => {
+    if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+    return (wsOrder[a.ws] || 0) - (wsOrder[b.ws] || 0);
+  });
+  buildGantt();
+  updateSummary();
+  applyFilters();
+  saveEvents();
+}
+
+// ============================================================
+// EXPORT — downloads a self-contained HTML snapshot
+// ============================================================
+function exportCalendar() {
+  // Clone current page HTML and bake in the current events data
+  const html = document.documentElement.outerHTML
+    .replace(/const events = loadEvents\(\);/, 'const events = ' + JSON.stringify(events, null, 2) + ';');
+  const blob = new Blob([`<!DOCTYPE html>\n${html}`], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'bill_launch_calendar_' + new Date().toISOString().slice(0,10) + '.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ============================================================
+// RESET TO DEFAULTS
+// ============================================================
+function resetData() {
+  if (!confirm('Reset all changes and restore the original calendar?')) return;
+  events.length = 0;
+  DEFAULT_EVENTS.forEach(e => events.push({ ...e }));
+  rebuildAll();
+}
+
 function buildGantt() {
+  const days = getActiveDays();
   const gantt = document.getElementById('gantt');
-  const totalW = days.length * COL_W;
-  gantt.style.width = totalW + 'px';
+  gantt.style.width = (days.length * COL_W) + 'px';
 
   // Date header
   let dateHTML = '';
@@ -789,26 +842,23 @@ function buildGantt() {
     </div>`;
   });
 
-  // Month labels row
+  // Month labels
   let monthHTML = '';
-  let currentMonth = -1;
-  let monthStartIdx = 0;
+  let currentMonth = -1, monthStartIdx = 0;
   days.forEach((d, i) => {
     if (d.getMonth() !== currentMonth) {
       if (currentMonth !== -1) {
-        const span = i - monthStartIdx;
-        monthHTML += `<div class="gantt-month-label" style="width:${span * COL_W}px">${monthNames[currentMonth]} ${days[monthStartIdx].getFullYear()}</div>`;
+        monthHTML += `<div class="gantt-month-label" style="width:${(i - monthStartIdx) * COL_W}px">${monthNames[currentMonth]} ${days[monthStartIdx].getFullYear()}</div>`;
       }
       currentMonth = d.getMonth();
       monthStartIdx = i;
     }
     if (i === days.length - 1) {
-      const span = i - monthStartIdx + 1;
-      monthHTML += `<div class="gantt-month-label" style="width:${span * COL_W}px">${monthNames[currentMonth]} ${days[monthStartIdx].getFullYear()}</div>`;
+      monthHTML += `<div class="gantt-month-label" style="width:${(i - monthStartIdx + 1) * COL_W}px">${monthNames[currentMonth]} ${days[monthStartIdx].getFullYear()}</div>`;
     }
   });
 
-  // Density row
+  // Density
   const densityMap = {};
   days.forEach(d => densityMap[fmtDate(d)] = 0);
   events.forEach(e => { if (densityMap[e.date] !== undefined) densityMap[e.date]++; });
@@ -832,7 +882,7 @@ function buildGantt() {
     eventsByDate[evt.date].push({ ...evt, idx });
   });
 
-  // Build columns — one per date
+  // Columns
   let colsHTML = '';
   days.forEach((d, i) => {
     const key = fmtDate(d);
@@ -844,6 +894,9 @@ function buildGantt() {
     let barsHTML = '';
     dateEvents.forEach(evt => {
       barsHTML += `<div class="event-bar" data-ws="${evt.ws}" data-idx="${evt.idx}"
+        draggable="true"
+        ondragstart="onDragStart(event, ${evt.idx})"
+        ondragend="onDragEnd(event)"
         onmouseenter="showTooltip(event, ${evt.idx})"
         onmousemove="moveTooltip(event)"
         onmouseleave="hideTooltip()">
@@ -851,10 +904,16 @@ function buildGantt() {
           <span>${evt.name}</span>
           <span class="event-audience">${evt.audience}</span>
         </div>
+        <button class="event-delete" onclick="event.stopPropagation(); deleteEvent(${evt.idx})" title="Remove">&times;</button>
       </div>`;
     });
 
-    colsHTML += `<div class="gantt-col ${cls}" style="width:${COL_W}px">${barsHTML}</div>`;
+    colsHTML += `<div class="gantt-col ${cls}" style="width:${COL_W}px"
+      ondragover="onColDragOver(event)"
+      ondragleave="onColDragLeave(event)"
+      ondrop="onColDrop(event, '${key}')">
+      ${barsHTML}
+    </div>`;
   });
 
   gantt.innerHTML = `
@@ -866,21 +925,18 @@ function buildGantt() {
 }
 
 // ============================================================
-// UPDATE DENSITY after filter
+// DENSITY UPDATE
 // ============================================================
 function updateDensity() {
+  const days = getActiveDays();
   const densityMap = {};
   days.forEach(d => densityMap[fmtDate(d)] = 0);
   events.forEach(e => {
-    if (activeFilters.has(e.ws) && densityMap[e.date] !== undefined) {
-      densityMap[e.date]++;
-    }
+    if (activeFilters.has(e.ws) && densityMap[e.date] !== undefined) densityMap[e.date]++;
   });
-
   document.querySelectorAll('.density-cell').forEach(cell => {
     const key = cell.dataset.date;
     const count = densityMap[key] || 0;
-    // Reset classes
     for (let i = 0; i <= 7; i++) cell.classList.remove('d-' + i);
     cell.classList.add('d-' + Math.min(count, 7));
     cell.querySelector('.density-count').textContent = count || '–';
@@ -888,46 +944,24 @@ function updateDensity() {
 }
 
 // ============================================================
-// SUMMARY CARDS
+// SUMMARY
 // ============================================================
 function updateSummary() {
+  const days = getActiveDays();
   const visible = events.filter(e => activeFilters.has(e.ws));
   const byWs = {};
   visible.forEach(e => { byWs[e.ws] = (byWs[e.ws] || 0) + 1; });
-
-  // Find busiest date
   const byDate = {};
   visible.forEach(e => { byDate[e.date] = (byDate[e.date] || 0) + 1; });
-  let busiestDate = '';
-  let busiestCount = 0;
-  for (const [d, c] of Object.entries(byDate)) {
-    if (c > busiestCount) { busiestCount = c; busiestDate = d; }
-  }
+  let busiestDate = '', busiestCount = 0;
+  for (const [d, c] of Object.entries(byDate)) { if (c > busiestCount) { busiestCount = c; busiestDate = d; } }
 
-  const html = `
-    <div class="summary-card">
-      <div class="label">Total Activities</div>
-      <div class="value">${visible.length}</div>
-      <div class="sub">Across ${Object.keys(byWs).length} workstreams</div>
-    </div>
-    <div class="summary-card">
-      <div class="label">Busiest Day</div>
-      <div class="value">${busiestDate ? fmtDateReadable(busiestDate) : '—'}</div>
-      <div class="sub">${busiestCount} activities scheduled</div>
-    </div>
-    <div class="summary-card">
-      <div class="label">Active Dates</div>
-      <div class="value">${days.length}</div>
-      <div class="sub">Apr 28 – Jun 15, 2025</div>
-    </div>
-    <div class="summary-card">
-      <div class="label">Active Workstreams</div>
-      <div class="value">${Object.keys(byWs).length}</div>
-      <div class="sub">${Object.keys(byWs).map(k => wsLabels[k]).join(', ')}</div>
-    </div>
+  document.getElementById('summary').innerHTML = `
+    <div class="summary-card"><div class="label">Total Activities</div><div class="value">${visible.length}</div><div class="sub">Across ${Object.keys(byWs).length} workstreams</div></div>
+    <div class="summary-card"><div class="label">Busiest Day</div><div class="value">${busiestDate ? fmtDateReadable(busiestDate) : '—'}</div><div class="sub">${busiestCount} activities scheduled</div></div>
+    <div class="summary-card"><div class="label">Active Dates</div><div class="value">${days.length}</div><div class="sub">Apr 28 – Jun 15, 2026</div></div>
+    <div class="summary-card"><div class="label">Active Workstreams</div><div class="value">${Object.keys(byWs).length}</div><div class="sub">${Object.keys(byWs).map(k => wsLabels[k]).join(', ')}</div></div>
   `;
-
-  document.getElementById('summary').innerHTML = html;
 }
 
 // ============================================================
@@ -939,39 +973,25 @@ const tooltipMeta = document.getElementById('tooltipMeta');
 
 function showTooltip(e, idx) {
   const evt = events[idx];
+  if (!evt) return;
   tooltipTitle.innerHTML = `<span class="tooltip-ws-dot" style="background:${wsColors[evt.ws]}"></span>${evt.name}`;
-  tooltipMeta.innerHTML = `
-    <span>${fmtDateReadable(evt.date)}</span>
-    <span>Audience: ${evt.audience}</span>
-    <span>Workstream: ${wsLabels[evt.ws]}</span>
-  `;
+  tooltipMeta.innerHTML = `<span>${fmtDateReadable(evt.date)}</span><span>Audience: ${evt.audience}</span><span>Workstream: ${wsLabels[evt.ws]}</span>`;
   tooltip.classList.add('visible');
   moveTooltip(e);
 }
-
 function moveTooltip(e) {
-  let x = e.clientX + 14;
-  let y = e.clientY + 14;
-  const tw = tooltip.offsetWidth;
-  const th = tooltip.offsetHeight;
-  if (x + tw > window.innerWidth - 12) x = e.clientX - tw - 10;
-  if (y + th > window.innerHeight - 12) y = e.clientY - th - 10;
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + tooltip.offsetWidth > window.innerWidth - 12) x = e.clientX - tooltip.offsetWidth - 10;
+  if (y + tooltip.offsetHeight > window.innerHeight - 12) y = e.clientY - tooltip.offsetHeight - 10;
   tooltip.style.left = x + 'px';
   tooltip.style.top = y + 'px';
 }
-
-function hideTooltip() {
-  tooltip.classList.remove('visible');
-}
+function hideTooltip() { tooltip.classList.remove('visible'); }
 
 // ============================================================
 // INIT
 // ============================================================
-buildGantt();
-updateSummary();
-
-// Scroll to first event area
-document.getElementById('ganttScroll').scrollLeft = 0;
+rebuildAll();
 </script>
 
 </body>
